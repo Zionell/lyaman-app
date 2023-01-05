@@ -25,7 +25,7 @@ export default {
 
     css: [
         '~/assets/scss/nullstyle',
-        '~/assets/scss/castom__scroll', ,
+        '~/assets/scss/castom__scroll',
         '~/assets/scss/style',
     ],
 

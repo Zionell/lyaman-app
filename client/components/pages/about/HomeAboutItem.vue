@@ -1,11 +1,11 @@
 <template>
     <div :class="$style.HomeAboutItem">
         <div :class="$style.imgWrap">
-            <img
-                :class="$style.img"
-                :src="image"
-                alt="Icon"
-            >
+            <!--            <img-->
+            <!--                :class="$style.img"-->
+            <!--                :src="image"-->
+            <!--                alt="Icon"-->
+            <!--            >-->
         </div>
         <SvgIcon :class="$style.line" :name="isEven ? 'even-line' : 'odd-line'"/>
         <h3 :class="$style.title">{{ data.title }}</h3>

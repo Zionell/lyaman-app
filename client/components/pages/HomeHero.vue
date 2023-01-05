@@ -5,7 +5,11 @@
                 <h1 :class="$style.title">{{ data.title }}</h1>
                 <div :class="$style.text" v-html="data.text"/>
 
-                <VButton icon="arrow-right">
+                <VButton
+                    tag="nuxt-link"
+                    to="#contacts"
+                    icon="arrow-right"
+                >
                     Записаться
                 </VButton>
             </div>

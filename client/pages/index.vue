@@ -17,6 +17,8 @@
         >
             <HomeAboutCourse :data="aboutCourse.steps"/>
         </SectionTemplate>
+
+        <HomeForm id="contacts" :data="form"/>
     </main>
 </template>
 
@@ -25,6 +27,7 @@ import HomeHero from '~/components/pages/HomeHero';
 import SectionTemplate from '~/components/common/SectionTemplate';
 import HomeAbout from '~/components/pages/about/HomeAbout';
 import HomeAboutCourse from '~/components/pages/aboutCourse/HomeAboutCourse';
+import HomeForm from '~/components/pages/form/HomeForm';
 
 export default {
     name: 'IndexPage',
@@ -34,21 +37,24 @@ export default {
         SectionTemplate,
         HomeAbout,
         HomeAboutCourse,
+        HomeForm,
     },
 
     async asyncData({ app }) {
         const [
-            hero, about, aboutCourse,
+            hero, about, aboutCourse, form,
         ] = await Promise.all([
             app.$axios.$get(app.$api.hero),
             app.$axios.$get(app.$api.about),
             app.$axios.$get(app.$api.aboutCourse),
+            app.$axios.$get(app.$api.form),
         ]);
 
         return {
             hero: hero,
             about: about,
             aboutCourse: aboutCourse,
+            form: form,
         };
     },
 
@@ -57,6 +63,7 @@ export default {
             hero: {},
             about: {},
             aboutCourse: {},
+            form: {},
         };
     },
 };

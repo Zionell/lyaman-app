@@ -4,4 +4,6 @@ export default {
     hero: '/hero.json',
     about: '/about.json',
     aboutCourse: '/about-course.json',
+    form: '/form.json',
+    request: 'http://localhost:5000/api/request',
 };

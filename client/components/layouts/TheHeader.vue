@@ -14,7 +14,11 @@
                 </nuxt-link>
             </nav>
 
-            <VButton icon="arrow-right">
+            <VButton
+                tag="nuxt-link"
+                to="#contacts"
+                icon="arrow-right"
+            >
                 Записаться
             </VButton>
         </div>
