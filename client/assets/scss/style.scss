@@ -1,0 +1,45 @@
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+
+    @media (max-width: 1440px) {
+        font-size: .694444vw;
+    }
+
+    @media (max-width: 1024px) {
+        font-size: .9765625vw;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 10px;
+    }
+}
+
+body {
+    font-family: $ff-regular;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.link {
+    color: var(--black);
+
+    &._active-link {
+        color: var(--primary);
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}

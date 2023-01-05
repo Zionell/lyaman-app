@@ -1,0 +1,20 @@
+//COLORS
+:root {
+    --primary: #2e4fd7;
+    --primaryHover: #1a3bc3;
+    --secondary: #e7ebfc;
+    --black: #000;
+    --white: #fff;
+    --grey: #1b2124;
+}
+
+$error: #f00;
+
+//Fonts
+$ff-bold: inter-bold, sans-serif;
+$ff-medium: inter-medium, sans-serif;
+$ff-regular: inter-regular, sans-serif;
+
+$transition: .3s ease-out;
+
+$h-height: 9rem;
