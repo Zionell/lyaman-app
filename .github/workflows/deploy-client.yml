@@ -31,7 +31,7 @@ jobs:
         run: npm run generate
 
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SOURCE: ${{ env.BUILD_SCRIPT_OUTPUT }}
