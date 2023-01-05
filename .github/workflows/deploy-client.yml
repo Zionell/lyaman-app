@@ -6,6 +6,7 @@ on:
     branches: [ master ]
 
 env:
+  DEPLOY_PATH: /home/a0548906/domains/lyaman-askerova.kz/public_html/
   BUILD_SCRIPT_OUTPUT: dist/
 
 jobs:
@@ -36,4 +37,4 @@ jobs:
           SOURCE: ${{ env.BUILD_SCRIPT_OUTPUT }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          TARGET: ${{ env.DEPLOY_PATH }}
