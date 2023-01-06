@@ -23,16 +23,26 @@ const headConfig = {
             name: 'description',
             content: 'Онлайн обучение digital-маркетингу с нуля. Индивидуальные занятие с программой подобранной под вас, разбор домашних заданий. Продвигай свой бизнес или работай маркетологом онлайн.',
         },
-        // Open Graph / Facebook
+
+        // Open Graph / Facebook / WhatsApp
         { hid: 'og:type', name: 'og:type', content: 'website' },
         { hid: 'og:url', name: 'og:url', content: 'https://lyaman-askerova.kz/' },
         { hid: 'og:title', name: 'og:title', content: 'Аскерова Ляман | Интернет-маркетолог' },
+        {
+            hid: 'og:site_name',
+            name: 'og:site_name',
+            content: 'Аскерова Ляман | Интернет-маркетолог',
+        },
         {
             hid: 'og:description',
             name: 'og:description',
             content: 'Онлайн обучение digital-маркетингу с нуля. Индивидуальные занятие с программой подобранной под вас, разбор домашних заданий. Продвигай свой бизнес или работай маркетологом онлайн.',
         },
         { hid: 'og:image', name: 'og:image', content: '/images/seo.jpg' },
+        { hid: 'og:image:type', name: 'og:image:type', content: '/images/seo.jpg' },
+        { hid: 'og:image:width', name: 'og:image:width', content: '300' },
+        { hid: 'og:image:height', name: 'og:image:height', content: '300' },
+
         // Twitter
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
         { hid: 'twitter:url', name: 'twitter:url', content: 'https://lyaman-askerova.kz/' },

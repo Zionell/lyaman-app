@@ -1,13 +1,12 @@
 <template>
     <div :class="$style.HomeAboutItem">
         <div :class="$style.imgWrap">
-            <!--            <img-->
-            <!--                :class="$style.img"-->
-            <!--                :src="image"-->
-            <!--                alt="Icon"-->
-            <!--            >-->
+            <img
+                :class="$style.img"
+                :src="image"
+                alt="Icon"
+            >
         </div>
-        <SvgIcon :class="$style.line" :name="isEven ? 'even-line' : 'odd-line'"/>
         <h3 :class="$style.title">{{ data.title }}</h3>
         <p :class="$style.text">{{ data.text }}</p>
     </div>
@@ -59,17 +58,14 @@ export default {
     }
 
     .imgWrap {
-        width: 7.2rem;
-        height: 7.2rem;
-        padding: 2.4rem;
-        border-radius: 50%;
-        background: var(--secondary);
+        width: 4.4rem;
+        height: 4.4rem;
     }
 
     .title {
-        @extend .p24b;
+        @extend .p18b;
 
-        padding: 1.6rem 0 .4rem;
+        padding: 1.6rem 0 .7rem;
     }
 
     .text {

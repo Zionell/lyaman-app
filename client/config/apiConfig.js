@@ -5,5 +5,5 @@ export default {
     about: '/about.json',
     aboutCourse: '/about-course.json',
     form: '/form.json',
-    request: 'http://localhost:5000/api/request',
+    request: 'https://lyaman-app.vercel.app/api/request',
 };

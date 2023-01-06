@@ -1,11 +1,19 @@
 <template>
     <div :class="$style.HomeAbout">
-        <HomeAboutItem
-            v-for="(item, ind) in data"
-            :key="ind"
-            :data="item"
-            :is-even="isEven(ind)"
-        />
+        <div :class="$style.itemsWrap">
+            <HomeAboutItem
+                v-for="(item, ind) in data.ways"
+                :key="ind"
+                :data="item"
+            />
+        </div>
+        <div :class="$style.imageWrap">
+            <img
+                :class="$style.img"
+                :src="image"
+                alt="Icon"
+            >
+        </div>
     </div>
 </template>
 
@@ -21,14 +29,15 @@ export default {
 
     props: {
         data: {
-            type: Array,
-            default: () => [],
+            type: Object,
+            default: () => ({}),
         },
     },
 
-    methods: {
-        isEven(ind) {
-            return ind % 2 === 0;
+    computed: {
+        image() {
+            const url = this.$api.baseURL + this.data?.image_url;
+            return url;
         },
     },
 };
@@ -37,7 +46,17 @@ export default {
 <style lang="scss" module>
     .HomeAbout {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 3rem;
+        grid-template-columns: 50rem 1fr;
+        gap: 10rem;
+    }
+
+    .itemsWrap {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6rem 9rem;
+    }
+
+    .img {
+        object-fit: contain;
     }
 </style>

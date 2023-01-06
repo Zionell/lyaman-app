@@ -7,7 +7,7 @@
             id="about"
             :title="about.title"
         >
-            <HomeAbout :data="about.ways"/>
+            <HomeAbout :data="about"/>
         </SectionTemplate>
 
         <SectionTemplate
