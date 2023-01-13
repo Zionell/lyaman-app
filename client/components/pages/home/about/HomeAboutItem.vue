@@ -39,36 +39,49 @@ export default {
 
 <style lang="scss" module>
     .HomeAboutItem {
-        position: relative;
-
-        &:nth-child(4),
-        &:last-child {
-            & .line {
-                display: none;
-            }
+        @include respond-to(tablet) {
+            display: grid;
+            grid-template-columns: 5rem 1fr;
+            gap: .8rem 2rem;
+            align-items: start;
         }
-    }
-
-    .line {
-        position: absolute;
-        top: 4rem;
-        right: 0;
-        width: 16.7rem;
-        height: 3.2rem;
     }
 
     .imgWrap {
         width: 4.4rem;
         height: 4.4rem;
+
+        @include respond-to(tablet) {
+            grid-row: 1/3;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .img {
+        object-fit: contain;
     }
 
     .title {
         @extend .p18b;
 
         padding: 1.6rem 0 .7rem;
+
+        @include respond-to(tablet) {
+            padding: 0;
+            font-size: 2.1rem;
+        }
+
+        @include respond-to(mobile) {
+            font-size: 1.6rem;
+        }
     }
 
     .text {
         @extend .p16;
+
+        @include respond-to(mobile) {
+            font-size: 1.4rem;
+        }
     }
 </style>

@@ -1,54 +1,98 @@
 <template>
     <header :class="[$style.TheHeader, {[$style._fixed]: !isVisible}]">
         <div :class="[$style.wrap, 'container']">
-            <SvgIcon :class="$style.logo" name="logo"/>
+            <SvgIcon
+                ref="logo"
+                :class="$style.logo"
+                name="logo"
+            />
 
             <nav :class="$style.nav">
-                <nuxt-link
+                <a
                     v-for="(item, ind) in menuItems"
                     :key="ind"
-                    :to="`#${item.value}`"
-                    :class="[$style.navItem, 'link']"
+                    :href="`#${item.value}`"
+                    :class="[$style.navItem, 'link', 'navItem']"
                 >
                     {{ item.label }}
-                </nuxt-link>
+                </a>
             </nav>
 
             <VButton
+                :class="[$style.btn, 'button']"
                 tag="nuxt-link"
                 to="#contacts"
                 icon="arrow-right"
             >
                 Записаться
             </VButton>
+
+            <TheBurger/>
         </div>
     </header>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import VButton from '~/components/ui/button/VButton';
 import headerVisibility from '~/mixins/headerVisibility';
+import TheBurger from '~/components/layouts/header/TheBurger';
+import { gsap } from 'gsap';
+import VButton from '~/components/ui/button/VButton';
 
 export default {
     name: 'TheHeader',
 
     components: {
+        TheBurger,
         VButton,
     },
 
     mixins: [headerVisibility],
+
+    data() {
+        return {
+            timeline: null,
+        };
+    },
 
     computed: {
         ...mapState({
             menuItems: state => state.general.menuItems,
         }),
     },
+
+    mounted() {
+        this.$nextTick(() => {
+            // this.initialAnimation();
+        });
+    },
+
+    methods: {
+        initialAnimation() {
+            gsap.from(this.$refs?.logo, {
+                x: -1000,
+                duration: 1,
+            });
+            gsap.from('.button', {
+                x: 1000,
+                duration: 1,
+            });
+            // gsap.from('.navItem', {
+            //     x: 100,
+            //     duration: 3,
+            //     stagger: 0.3,
+            // });
+            // gsap.utils.toArray('.navItem')
+            //     .forEach((item, ind) => {
+            //     });
+        },
+    },
 };
 </script>
 
 <style lang="scss" module>
     .TheHeader {
+        overflow: hidden;
         height: $h-height;
         background: var(--white);
         transition: $transition;
@@ -67,6 +111,23 @@ export default {
                 padding-bottom: 1rem;
             }
         }
+
+        & .btn {
+            @include respond-to(mobile) {
+                display: none;
+            }
+        }
+
+        @include respond-to(tablet) {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            height: auto;
+        }
+
+        @include respond-to(mobile) {
+            background: var(--secondary);
+        }
     }
 
     .wrap {
@@ -75,6 +136,11 @@ export default {
         justify-content: space-between;
         padding-top: 2rem;
         padding-bottom: 2rem;
+
+        @include respond-to(mobile) {
+            padding-top: .8rem;
+            padding-bottom: .8rem;
+        }
     }
 
     .logo {
@@ -85,6 +151,14 @@ export default {
     .nav {
         flex-grow: 1;
         margin: 0 5.3rem;
+
+        @include respond-to(tablet) {
+            margin: 0 3.2rem;
+        }
+
+        @include respond-to(mobile) {
+            display: none;
+        }
     }
 
     .navItem {
@@ -108,9 +182,11 @@ export default {
             transition: $transition;
         }
 
-        &:hover {
-            &:after {
-                width: 100%;
+        @include hover() {
+            &:hover {
+                &:after {
+                    width: 100%;
+                }
             }
         }
     }

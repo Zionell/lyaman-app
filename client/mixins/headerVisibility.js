@@ -6,7 +6,9 @@ export default {
     },
 
     mounted() {
-        document.addEventListener('scroll', this.scroll);
+        if (window?.innerWidth > 1024) {
+            document.addEventListener('scroll', this.scroll);
+        }
     },
 
     beforeDestroy() {

@@ -45,8 +45,10 @@ export default {
             width: 12rem;
         }
 
-        &:hover {
-            color: var(--primaryHover);
+        @include hover() {
+            &:hover {
+                color: var(--primaryHover);
+            }
         }
     }
 </style>

@@ -7,6 +7,14 @@ require('dotenv')
 const isDev = process.env.NODE_ENV === 'development';
 
 export default {
+    target: 'static',
+
+    loadingIndicator: {
+        name: 'pulse',
+        color: '#3B8070',
+        background: 'white',
+    },
+
     head: headConfig,
 
     // Router settings
@@ -15,8 +23,6 @@ export default {
         linkExactActiveClass: '_exact-link',
     },
 
-    // * Customize the progress-bar color
-    // loading: '~/components/layout/progress/TheProgress.vue',
     loading: {
         color: '#d9ff6c',
         height: '2px',
@@ -31,13 +37,13 @@ export default {
 
     styleResources: {
         scss: [
+            './assets/scss/shared/_function.scss',
             './assets/scss/shared/_mixins.scss',
             './assets/scss/shared/_fonts.scss',
             './assets/scss/shared/_vars.scss',
             './assets/scss/shared/_text.scss',
         ],
     },
-
 
     plugins: plugins,
 

@@ -38,12 +38,25 @@ export default {
         min-height: 27.4rem;
         padding: 4rem 0 0 8rem;
         background-repeat: no-repeat;
+
+        @include respond-to(tablet) {
+            padding: 2rem 0 0 6rem;
+        }
+
+        @include respond-to(mobile) {
+            padding: 0;
+            background-position: right bottom;
+        }
     }
 
     .content {
         height: 100%;
         padding: 2.8rem 3.2rem;
         background: linear-gradient(151deg, #8b9bdc 0%, rgba(255, 255, 255, 0) 43%);
+
+        @include respond-to(tablet) {
+            padding: 1.8rem 2.4rem;
+        }
     }
 
     .title {

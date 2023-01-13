@@ -26,7 +26,7 @@
                     placeholder="Комментарий ..."
                 />
 
-                <VButton>
+                <VButton @click="submit">
                     Записаться
                 </VButton>
             </form>
@@ -77,6 +77,10 @@ export default {
         checkError() {
             let hasError = false;
             const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm;
+            this.error = {
+                email: '',
+                name: '',
+            };
 
             if (!emailRegex.test(this.formInfo.email)) {
                 hasError = true;
@@ -113,6 +117,11 @@ export default {
             height: 35rem;
             background: var(--secondary);
         }
+
+        @include respond-to(tablet) {
+            padding-top: 5rem;
+            padding-bottom: 3rem;
+        }
     }
 
     .wrap {
@@ -120,20 +129,45 @@ export default {
         grid-template-columns: 1fr 48rem;
         justify-content: space-between;
         gap: 3rem;
+
+        @include respond-to(tablet) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
     }
 
     .content {
         max-width: 48rem;
+
+        @include respond-to(tablet) {
+            max-width: 50%;
+        }
+
+        @include respond-to(mobile) {
+            max-width: 65%;
+        }
     }
 
     .title {
-        @extend .h1;
+        @extend .h3;
+
+        @include respond-to(tablet) {
+            font-size: 3.2rem;
+        }
+
+        @include respond-to(mobile) {
+            font-size: 2.2rem;
+        }
     }
 
     .text {
         @extend .p18;
 
         color: var(--lightGrey);
+
+        @include respond-to(tablet) {
+            font-size: 1.6rem;
+        }
     }
 
     .form {
@@ -143,5 +177,10 @@ export default {
         border: 1px solid var(--border);
         background: var(--white);
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+
+        @include respond-to(tablet) {
+            gap: 2rem;
+            padding: 2.1rem 1.8rem;
+        }
     }
 </style>

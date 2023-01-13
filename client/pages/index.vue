@@ -3,19 +3,19 @@
         <HomeHero id="main" :data="hero"/>
 
         <SectionTemplate
-            v-if="about.ways"
-            id="about"
-            :title="about.title"
-        >
-            <HomeAbout :data="about"/>
-        </SectionTemplate>
-
-        <SectionTemplate
-            v-if="aboutCourse.steps"
+            v-if="aboutCourse.steps.length"
             id="about-course"
             :title="aboutCourse.title"
         >
             <HomeAboutCourse :data="aboutCourse.steps"/>
+        </SectionTemplate>
+
+        <SectionTemplate
+            v-if="myWorks.works.length"
+            id="my-works"
+            :title="myWorks.title"
+        >
+            <HomeMyWorks :data="myWorks.works"/>
         </SectionTemplate>
 
         <HomeForm id="contacts" :data="form"/>
@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import HomeHero from '~/components/pages/HomeHero';
+import HomeHero from '~/components/pages/home/HomeHero';
 import SectionTemplate from '~/components/common/SectionTemplate';
-import HomeAbout from '~/components/pages/about/HomeAbout';
-import HomeAboutCourse from '~/components/pages/aboutCourse/HomeAboutCourse';
-import HomeForm from '~/components/pages/form/HomeForm';
+import HomeAboutCourse from '~/components/pages/home/aboutCourse/HomeAboutCourse';
+import HomeForm from '~/components/pages/home/form/HomeForm';
+import HomeMyWorks from '~/components/pages/home/works/HomeMyWorks';
 
 export default {
     name: 'IndexPage',
@@ -35,26 +35,30 @@ export default {
     components: {
         HomeHero,
         SectionTemplate,
-        HomeAbout,
         HomeAboutCourse,
         HomeForm,
+        HomeMyWorks,
     },
 
     async asyncData({ app }) {
         const [
-            hero, about, aboutCourse, form,
+            hero, aboutCourse, form, myWorks,
         ] = await Promise.all([
             app.$axios.$get(app.$api.hero),
-            app.$axios.$get(app.$api.about),
+            // app.$axios.$get(app.$api.about),
             app.$axios.$get(app.$api.aboutCourse),
+            // app.$axios.$get(app.$api.reviews),
             app.$axios.$get(app.$api.form),
+            app.$axios.$get(app.$api.myWorks),
         ]);
 
         return {
-            hero: hero,
-            about: about,
-            aboutCourse: aboutCourse,
-            form: form,
+            hero: hero || {},
+            // about: about || {},
+            aboutCourse: aboutCourse || {},
+            // reviews: reviews?.reviews || [],
+            form: form || {},
+            myWorks: myWorks || {},
         };
     },
 
@@ -63,7 +67,9 @@ export default {
             hero: {},
             about: {},
             aboutCourse: {},
+            reviews: [],
             form: {},
+            myWorks: {},
         };
     },
 };

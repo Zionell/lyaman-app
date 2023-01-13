@@ -50,7 +50,17 @@ export default {
     .HomeHero {
         display: flex;
         align-items: center;
-        height: calc(100vh - $h-height);
+        min-height: calc(100vh - $h-height);
+
+        @include respond-to(tablet) {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        @include respond-to(mobile) {
+            padding-top: 2.4rem;
+            padding-bottom: 2.4rem;
+        }
     }
 
     .wrap {
@@ -58,25 +68,67 @@ export default {
         grid-template-columns: 1fr 46rem;
         justify-content: space-between;
         gap: 10rem;
+
+        @include respond-to(tablet) {
+            grid-template-columns: 1fr;
+            gap: 5rem;
+            width: 100%;
+            height: 100%;
+        }
+
+        @include respond-to(mobile) {
+            gap: 2rem;
+        }
     }
 
     .content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
+        @include respond-to(tablet) {
+            width: 60%;
+        }
+
+        @include respond-to(mobile) {
+            width: 100%;
+        }
     }
 
     .title {
         @extend .h1;
+
+        @include respond-to(mobile) {
+            font-size: 3.2rem;
+        }
     }
 
     .text {
         @extend .p18;
 
         padding: 4rem 0;
+
+        @include respond-to(tablet) {
+            padding: 2.4rem 0;
+        }
+
+        @include respond-to(mobile) {
+            padding: 1.2rem 0;
+            font-size: 1.6rem;
+        }
     }
 
     .imgWrap {
         height: 55rem;
+
+        @include respond-to(tablet) {
+            justify-self: end;
+            width: 60%;
+            height: 100%;
+        }
+
+        @include respond-to(mobile) {
+            width: 100%;
+        }
     }
 </style>

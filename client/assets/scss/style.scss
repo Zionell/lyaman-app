@@ -1,3 +1,5 @@
+@import "~swiper/swiper.scss";
+
 html {
     font-size: 10px;
     scroll-behavior: smooth;
@@ -43,3 +45,14 @@ body {
 .fade-leave-to {
     opacity: 0;
 }
+
+.burger-enter-active,
+.burger-leave-active {
+    transition: transform .3s ease-out;
+}
+
+.burger-enter,
+.burger-leave-active {
+    transform: translateX(100%);
+}
+

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import HomeAboutItem from '~/components/pages/about/HomeAboutItem';
+import HomeAboutItem from '~/components/pages/home/about/HomeAboutItem';
 
 export default {
     name: 'HomeAbout',
@@ -48,12 +48,30 @@ export default {
         display: grid;
         grid-template-columns: 50rem 1fr;
         gap: 10rem;
+
+        @include respond-to(tablet) {
+            grid-template-columns: 1fr;
+            gap: 5rem;
+        }
+
+        @include respond-to(mobile) {
+            gap: 2.4rem;
+        }
     }
 
     .itemsWrap {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
         gap: 6rem 9rem;
+
+        @include respond-to(tablet) {
+            grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+            gap: 2rem 3rem;
+        }
+
+        @include respond-to(mobile) {
+            gap: 2rem;
+        }
     }
 
     .img {

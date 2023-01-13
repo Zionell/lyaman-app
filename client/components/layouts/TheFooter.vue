@@ -61,10 +61,20 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @include respond-to(mobile) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     .nav {
         display: flex;
+
+        @include respond-to(mobile) {
+            align-self: center;
+            margin-top: 3.2rem;
+        }
     }
 
     .navItem {
@@ -86,10 +96,16 @@ export default {
             transition: $transition;
         }
 
-        &:hover {
-            &:after {
-                width: 100%;
+        @include hover() {
+            &:hover {
+                &:after {
+                    width: 100%;
+                }
             }
+        }
+
+        @include respond-to(mobile) {
+            font-size: 1.4rem;
         }
     }
 
@@ -100,14 +116,20 @@ export default {
         gap: .5rem;
         margin: 3.2rem 0 3.2rem auto;
         text-align: right;
+
+        @include respond-to(mobile) {
+            margin: 2rem 0 2rem auto;
+        }
     }
 
     .link {
         color: var(--black);
         transition: $transition;
 
-        &:hover {
-            color: var(--primaryHover);
+        @include hover() {
+            &:hover {
+                color: var(--primaryHover);
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-//COLORS
+//Colors
 :root {
     --primary: #2e4fd7;
     --primaryHover: #1a3bc3;
@@ -20,3 +20,10 @@ $ff-regular: inter-regular, sans-serif;
 $transition: .3s ease-out;
 
 $h-height: 9rem;
+
+//Breakpoints
+$breakpoints: (
+    mobile: 0,
+    tablet: 768px,
+    desktop: 1025px,
+);

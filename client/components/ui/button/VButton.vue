@@ -3,6 +3,7 @@
         :is="tag"
         :class="[$style.VButton, classes]"
         v-bind="$attrs"
+        @click.prevent="$emit('click')"
     >
         <slot></slot>
         <SvgIcon
@@ -27,12 +28,17 @@ export default {
         type: {
             type: String,
             default: 'primary',
-            validator: () => ['primary', 'secondary', 'outlined'],
+            validator: () => ['primary', 'secondary', 'outlined', 'slider'],
         },
 
         icon: {
             type: String,
             default: '',
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false,
         },
     },
 
@@ -40,6 +46,7 @@ export default {
         classes() {
             return {
                 [this.$style[this.type]]: this.type,
+                [this.$style['is-disabled']]: this.disabled,
             };
         },
     },
@@ -61,9 +68,34 @@ export default {
         color: var(--white);
         transition: $transition;
 
-        &:hover {
-            background: var(--white);
-            color: var(--primary);
+        &.slider {
+            width: 5rem;
+            height: 5rem;
+            padding: 0;
+            border-radius: 50%;
+
+            .icon {
+                width: 3rem;
+                height: 3rem;
+                margin-left: 0;
+            }
+        }
+
+        &.is-disabled {
+            pointer-events: none;
+            opacity: .6;
+        }
+
+        @include hover() {
+            &:hover {
+                background: var(--white);
+                color: var(--primary);
+            }
+        }
+
+        @include respond-to(mobile) {
+            padding: .4rem 1rem;
+            font-size: 1.4rem;
         }
     }
 
