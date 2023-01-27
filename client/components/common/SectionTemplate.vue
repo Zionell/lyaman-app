@@ -26,11 +26,11 @@ export default {
         padding: 6.4rem 0 7.5rem;
 
         @include respond-to(tablet) {
-            padding: 4.6rem 0 5.8rem;
+            padding: 0 0 5.8rem;
         }
 
         @include respond-to(mobile) {
-            padding: 2.4rem 0 3.2rem;
+            padding: 0 0 3.2rem;
         }
     }
 

@@ -2,7 +2,9 @@
     <footer :class="$style.TheFooter">
         <div class="container">
             <div :class="$style.footerTop">
-                <SvgIcon :class="$style.logo" name="logo"/>
+                <nuxt-link to="/">
+                    <SvgIcon :class="$style.logo" name="logo"/>
+                </nuxt-link>
                 <nav :class="$style.nav">
                     <nuxt-link
                         v-for="(item, ind) in menuItems"
@@ -113,6 +115,7 @@ export default {
         @extend .p14b;
 
         display: grid;
+        justify-items: end;
         gap: .5rem;
         margin: 3.2rem 0 3.2rem auto;
         text-align: right;

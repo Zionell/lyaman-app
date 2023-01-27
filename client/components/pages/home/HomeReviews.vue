@@ -1,52 +1,55 @@
 <template>
     <div :class="$style.HomeReviews">
-        <div class="container">
-            <div
-                ref="slider"
-                class="slider"
-                :class="$style.slider"
-            >
-                <div class="swiper-wrapper">
-                    <div
-                        v-for="(slide, idx) in slides"
-                        :key="idx"
-                        class="swiper-slide"
-                        :class="$style.review"
-                    >
-                        <div :class="$style.rewiewImgWrap">
-                            <img
-                                :class="$style.rewiewImg"
-                                src="img/Layer_36.png"
-                                alt=""
-                            >
-                        </div>
+        <VButton
+            :class="[$style.btn, $style._prev]"
+            type="slider"
+            icon="left"
+            :disabled="isAvailable.isBeginning"
+            @click="slider.slidePrev()"
+        />
 
-                        <div :class="$style.reviewContent">
-                            <div :class="$style.reviewText">
-                                “Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                ad
-                                minim veniam, quis nostrud
-                                exercitation.”
-                            </div>
-                            <div :class="$style.reviewAuthor">Joshua Earle</div>
-
-                        </div>
-                    </div>
-                </div>
+        <div
+            ref="slider"
+            class="slider"
+            :class="$style.slider"
+        >
+            <div class="swiper-wrapper">
                 <div
-                    ref="pagination"
-                    :class="$style.bullets"
-                />
+                    v-for="(slide, idx) in slides"
+                    :key="idx"
+                    class="swiper-slide"
+                    :class="$style.review"
+                >
+                    <div :class="$style.reviewText" v-html="slide.review"/>
+                    <div :class="$style.reviewAuthor" v-html="slide.name"/>
+                </div>
             </div>
+            <div
+                ref="pagination"
+                :class="$style.bullets"
+            />
         </div>
+
+        <VButton
+            :class="[$style.btn, $style._next]"
+            type="slider"
+            icon="right"
+            :disabled="isAvailable.isEnd"
+            @click="slider.slideNext()"
+        />
     </div>
 </template>
 
 <script>
 export default {
     name: 'HomeReviews',
+
+    props: {
+        slides: {
+            type: Array,
+            default: () => [],
+        },
+    },
 
     data() {
         return {
@@ -72,13 +75,12 @@ export default {
     methods: {
         initSlider() {
             this.slider = new this.$Swiper(this.$refs.slider, {
-                slidesPerView: 2.2,
+                slidesPerView: 1,
+                spaceBetween: 100,
                 speed: 800,
 
                 pagination: {
                     el: this.$refs.pagination,
-                    bulletClass: 'bullet',
-                    bulletActiveClass: '_active',
                     type: 'bullets',
                 },
             });
@@ -90,60 +92,82 @@ export default {
 
 <style lang="scss" module>
     .HomeReviews {
-        //
+        display: flex;
+        align-items: center;
     }
 
-    .reviews {
-        margin: 120px auto 0;
-        padding: 70px 0;
-        background-color: #f8f8f8;
+    .slider {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+
+        .bullets {
+            position: absolute;
+            bottom: 1rem;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+
+            :global(.swiper-pagination-bullet) {
+                width: 5rem;
+                height: .4rem;
+                border-radius: 0;
+
+                &:not(:last-child) {
+                    margin-right: 1rem;
+                }
+            }
+
+            :global(.swiper-pagination-bullet-active) {
+                background: var(--primary);
+            }
+        }
     }
 
     .review {
-        position: relative;
-        text-align: left;
+        padding: 7rem;
+        border-radius: 2rem;
+        background: var(--secondary);
+        user-select: none;
     }
 
-    .rewiew_img {
-        position: absolute;
-        top: 10%;
-        left: 8%;
-    }
-
-    .rew_img {
-        width: 100%;
-        padding: 15px;
-        border: 3px solid #95e1d3;
-    }
-
-    .reviews-content {
-        padding-left: 30%;
-    }
-
-    .reviews_text {
+    .reviewText {
         font-family: "Roboto", sans-serif;
-        font-size: 24px;
-        line-height: 36px;
-        color: #999;
+        font-size: 2.4rem;
+        line-height: 3.6rem;
     }
 
-    .reviews_author {
+    .reviewAuthor {
         position: relative;
-        padding-top: 23px;
-        padding-left: 70px;
-        font-size: 24px;
+        padding-top: 2.3rem;
+        padding-left: 7rem;
+        font-size: 2.4rem;
         color: #333;
     }
 
-    .reviews_author:before {
+    .reviewAuthor:before {
         content: "";
         position: absolute;
         top: 65%;
         left: 0;
         display: block;
-        width: 60px;
+        width: 6rem;
         height: 3px;
         margin-top: 1px;
-        background-color: #f38181;
+        background-color: var(--primary);
+    }
+
+    .btn {
+        &._prev {
+            margin-right: 2.4rem;
+        }
+
+        &._next {
+            margin-left: 2.4rem;
+        }
+
+        @include respond-to(tablet) {
+            display: none;
+        }
     }
 </style>

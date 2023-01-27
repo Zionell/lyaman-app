@@ -24,7 +24,7 @@
                 to="#contacts"
                 icon="arrow-right"
             >
-                Записаться
+                Написать мне
             </VButton>
 
             <TheBurger/>
@@ -150,11 +150,7 @@ export default {
 
     .nav {
         flex-grow: 1;
-        margin: 0 5.3rem;
-
-        @include respond-to(tablet) {
-            margin: 0 3.2rem;
-        }
+        margin: 0 6.2rem;
 
         @include respond-to(mobile) {
             display: none;
@@ -168,7 +164,7 @@ export default {
         transition: $transition;
 
         &:not(:last-child) {
-            margin-right: 3rem;
+            margin-right: 2.4rem;
         }
 
         &:after {

@@ -18,6 +18,14 @@
             <HomeMyWorks :data="myWorks.works"/>
         </SectionTemplate>
 
+        <SectionTemplate
+            v-if="reviews.length"
+            id="my-works"
+            title="Отзывы"
+        >
+            <HomeReviews :slides="reviews"/>
+        </SectionTemplate>
+
         <HomeForm id="contacts" :data="form"/>
     </main>
 </template>
@@ -28,6 +36,7 @@ import SectionTemplate from '~/components/common/SectionTemplate';
 import HomeAboutCourse from '~/components/pages/home/aboutCourse/HomeAboutCourse';
 import HomeForm from '~/components/pages/home/form/HomeForm';
 import HomeMyWorks from '~/components/pages/home/works/HomeMyWorks';
+import HomeReviews from '~/components/pages/home/HomeReviews';
 
 export default {
     name: 'IndexPage',
@@ -37,26 +46,25 @@ export default {
         SectionTemplate,
         HomeAboutCourse,
         HomeForm,
+        HomeReviews,
         HomeMyWorks,
     },
 
     async asyncData({ app }) {
         const [
-            hero, aboutCourse, form, myWorks,
+            hero, aboutCourse, reviews, form, myWorks,
         ] = await Promise.all([
             app.$axios.$get(app.$api.hero),
-            // app.$axios.$get(app.$api.about),
             app.$axios.$get(app.$api.aboutCourse),
-            // app.$axios.$get(app.$api.reviews),
+            app.$axios.$get(app.$api.reviews),
             app.$axios.$get(app.$api.form),
             app.$axios.$get(app.$api.myWorks),
         ]);
 
         return {
             hero: hero || {},
-            // about: about || {},
             aboutCourse: aboutCourse || {},
-            // reviews: reviews?.reviews || [],
+            reviews: reviews?.reviews || [],
             form: form || {},
             myWorks: myWorks || {},
         };

@@ -10,7 +10,7 @@
                     to="#contacts"
                     icon="arrow-right"
                 >
-                    Записаться
+                    Написать мне
                 </VButton>
             </div>
             <div :class="$style.imgWrap">

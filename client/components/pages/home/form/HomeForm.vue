@@ -27,7 +27,7 @@
                 />
 
                 <VButton @click="submit">
-                    Записаться
+                    Отправить
                 </VButton>
             </form>
         </div>
