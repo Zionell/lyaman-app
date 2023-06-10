@@ -2,11 +2,11 @@
 :root {
     --primary: #2e4fd7;
     --primaryHover: #1a3bc3;
-    --secondary: #e7ebfc;
+    --secondary: #2d60a2;
     --black: #000;
     --white: #fff;
     --grey: #1b2124;
-    --lightGrey: #64626a;
+    --lightGrey: #f3eef3;
     --border: #b4b4b4;
 }
 
@@ -19,7 +19,7 @@ $ff-regular: inter-regular, sans-serif;
 
 $transition: .3s ease-out;
 
-$h-height: 9rem;
+$h-height: 8rem;
 
 //Breakpoints
 $breakpoints: (

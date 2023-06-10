@@ -1,18 +1,23 @@
 import headConfig from './config/headConfig';
 import { plugins } from './config/plugins';
+import { proxy } from './config/proxy';
 
 require('dotenv')
     .config();
 
 const isDev = process.env.NODE_ENV === 'development';
+const base_url = process.env.SERVER_API_URL;
 
 export default {
-    target: 'static',
-
     loadingIndicator: {
         name: 'pulse',
         color: '#3B8070',
         background: 'white',
+    },
+
+    server: {
+        port: 3000,
+        host: '0.0.0.0',
     },
 
     head: headConfig,
@@ -74,8 +79,29 @@ export default {
         '@nuxtjs/style-resources',
     ],
 
+    buildModules: [
+        '@nuxt/image',
+    ],
+
+    image: {
+        domains: [base_url],
+        providers: {
+            customProvider: {
+                name: 'customProvider',
+                provider: '~/assets/js/imageProvider',
+                options: {
+                    baseURL: base_url,
+                },
+            },
+        },
+    },
+
+    proxy: proxy(),
+
     axios: {
-        baseURL: 'https://raw.githubusercontent.com/Lyamann/study/main',
+        proxy: true,
+        baseURL: base_url,
+        withCredentials: false,
     },
 
     build: {

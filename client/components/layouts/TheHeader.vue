@@ -23,6 +23,7 @@
                 tag="nuxt-link"
                 to="#contacts"
                 icon="arrow-right"
+                round
             >
                 Написать мне
             </VButton>
@@ -93,6 +94,8 @@ export default {
 <style lang="scss" module>
     .TheHeader {
         overflow: hidden;
+        display: flex;
+        align-items: center;
         height: $h-height;
         background: var(--white);
         transition: $transition;
@@ -134,8 +137,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
 
         @include respond-to(mobile) {
             padding-top: .8rem;

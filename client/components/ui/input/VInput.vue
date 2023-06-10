@@ -4,7 +4,6 @@
         <textarea
             v-if="type === 'textarea'"
             :value="value"
-            class="castom__scroll"
             :class="$style.textarea"
             :placeholder="placeholder"
             @input="$emit('input', $event.target.value)"
@@ -69,6 +68,7 @@ export default {
         @extend .p14;
 
         padding: .9rem 1.8rem;
+        border-radius: 3rem;
         border: 1px solid var(--border);
     }
 

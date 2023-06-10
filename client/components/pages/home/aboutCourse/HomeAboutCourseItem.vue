@@ -52,7 +52,8 @@ export default {
     .content {
         height: 100%;
         padding: 2.8rem 3.2rem;
-        background: linear-gradient(151deg, #8b9bdc 0%, rgba(255, 255, 255, 0) 43%);
+        border-radius: 5rem;
+        background: linear-gradient(162deg, #8b9bdc 0%, rgba(255, 255, 255, 0) 56%);
 
         @include respond-to(tablet) {
             padding: 1.8rem 2.4rem;

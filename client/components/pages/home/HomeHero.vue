@@ -1,21 +1,37 @@
 <template>
-    <div :class="$style.HomeHero">
-        <div :class="['container', $style.wrap]">
-            <div :class="$style.content">
-                <h1 :class="$style.title">{{ data.title }}</h1>
-                <div :class="$style.text" v-html="data.text"/>
-
-                <VButton
-                    tag="nuxt-link"
-                    to="#contacts"
-                    icon="arrow-right"
-                >
-                    Написать мне
-                </VButton>
-            </div>
+    <div :class="[$style.HomeHero, 'container']">
+        <div :class="$style.left">
             <div :class="$style.imgWrap">
-                <img :src="image" alt="Мое фото">
+                <nuxt-img
+                    format="webp"
+                    :src="data.image"
+                    alt="Мое фото"
+                    loading="lazy"
+                    :placeholder="15"
+                    provider="customProvider"
+                    :class="$style.image"
+                />
             </div>
+            <div :class="$style.tags">
+                <div :class="$style.tag">
+                    {{ data.tag1 }}
+                </div>
+                <div :class="$style.tag">
+                    {{ data.tag2 }}
+                </div>
+            </div>
+        </div>
+        <div :class="$style.content">
+            <h1 :class="$style.title">{{ data.title }}</h1>
+            <div :class="$style.text" v-html="data.text"/>
+
+            <VButton
+                tag="nuxt-link"
+                to="#contacts"
+                round
+            >
+                {{ data.btnText }}
+            </VButton>
         </div>
     </div>
 </template>
@@ -36,99 +52,67 @@ export default {
             default: () => ({}),
         },
     },
-
-    computed: {
-        image() {
-            const url = this.$api.baseURL + this.data?.img_url;
-            return url;
-        },
-    },
 };
 </script>
 
 <style lang="scss" module>
     .HomeHero {
-        display: flex;
-        align-items: center;
-        min-height: calc(100vh - $h-height);
-
-        @include respond-to(tablet) {
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-        }
-
-        @include respond-to(mobile) {
-            padding-top: 2.4rem;
-            padding-bottom: 2.4rem;
-        }
-    }
-
-    .wrap {
         display: grid;
-        grid-template-columns: 1fr 46rem;
+        grid-template-columns: 50rem 1fr;
+        align-items: center;
         justify-content: space-between;
         gap: 10rem;
-
-        @include respond-to(tablet) {
-            grid-template-columns: 1fr;
-            gap: 5rem;
-            width: 100%;
-            height: 100%;
-        }
-
-        @include respond-to(mobile) {
-            gap: 2rem;
-        }
+        height: calc(100vh - $h-height);
+        padding-top: 1.6rem;
+        padding-bottom: 1.6rem;
     }
 
     .content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-
-        @include respond-to(tablet) {
-            width: 60%;
-        }
-
-        @include respond-to(mobile) {
-            width: 100%;
-        }
     }
 
     .title {
         @extend .h1;
-
-        @include respond-to(mobile) {
-            font-size: 3.2rem;
-        }
     }
 
     .text {
-        @extend .p18;
+        @extend .p24;
 
         padding: 4rem 0;
+    }
 
-        @include respond-to(tablet) {
-            padding: 2.4rem 0;
-        }
-
-        @include respond-to(mobile) {
-            padding: 1.2rem 0;
-            font-size: 1.6rem;
-        }
+    .left {
+        display: grid;
+        grid-template-rows: 1fr 7.2rem;
+        gap: 2.4rem;
     }
 
     .imgWrap {
-        height: 55rem;
+        padding: 2rem;
+        border-radius: 5rem;
+        border: 5px solid var(--secondary);
+    }
 
-        @include respond-to(tablet) {
-            justify-self: end;
-            width: 60%;
-            height: 100%;
-        }
+    .image {
+        border-radius: 5rem;
+    }
 
-        @include respond-to(mobile) {
-            width: 100%;
-        }
+    .tags {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: .5rem;
+    }
+
+    .tag {
+        @extend .p24;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5rem;
+        border: 5px solid var(--secondary);
+        color: var(--secondary);
     }
 </style>

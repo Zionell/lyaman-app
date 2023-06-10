@@ -40,6 +40,11 @@ export default {
             type: Boolean,
             default: false,
         },
+
+        round: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     computed: {
@@ -47,6 +52,7 @@ export default {
             return {
                 [this.$style[this.type]]: this.type,
                 [this.$style['is-disabled']]: this.disabled,
+                [this.$style['is-round']]: this.round,
             };
         },
     },
@@ -84,6 +90,10 @@ export default {
         &.is-disabled {
             pointer-events: none;
             opacity: .6;
+        }
+
+        &.is-round {
+            border-radius: 5rem;
         }
 
         @include hover() {

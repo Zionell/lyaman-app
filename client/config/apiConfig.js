@@ -1,12 +1,8 @@
 export default {
-    baseURL: 'https://raw.githubusercontent.com/Lyamann/study/main',
-    general: '/general.json',
-    hero: '/hero.json',
-    about: '/about.json',
-    aboutCourse: '/about-course.json',
-    reviews: '/review.json',
-    form: '/form.json',
-    myWorks: '/my-works.json',
-
-    request: 'https://lyaman-app.vercel.app/api/request',
+    header: '/api/v1/header/',
+    projectSteps: '/api/v1/project_steps/',
+    workProcess: '/api/v1/work_process/',
+    request: '/api/v1/request/',
+    contacts: '/api/v1/contacts/',
+    menuItems: '/api/v1/menu_items/',
 };

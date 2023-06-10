@@ -24,7 +24,7 @@
                     :class="$style.link"
                     :href="link.link"
                     target="_blank"
-                >{{ link.label }}</a>
+                >{{ link.name }}</a>
             </div>
 
             <MyLogo/>
@@ -85,6 +85,10 @@ export default {
 
         &:not(:last-child) {
             margin-right: 2rem;
+        }
+
+        &:visited {
+            color: var(--white);
         }
 
         &:after {

@@ -6,6 +6,6 @@ export const mutations = {};
 
 export const actions = {
     async nuxtServerInit({ dispatch }) {
-        await dispatch('general/fetchMenuItems');
+        await dispatch('general/fetchContacts');
     },
 };

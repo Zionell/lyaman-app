@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.SectionTemplate">
+    <div :class="[$style.SectionTemplate, {[$style._isBlue]: isBlue}]">
         <div class="container">
             <h2 :class="[$style.title, 'h3']">{{ title }}</h2>
 
@@ -17,20 +17,25 @@ export default {
             type: String,
             default: '',
         },
+
+        isBlue: {
+            type: Boolean,
+            default: false,
+        },
     },
 };
 </script>
 
 <style lang="scss" module>
     .SectionTemplate {
-        padding: 6.4rem 0 7.5rem;
+        padding: 5rem 0;
 
-        @include respond-to(tablet) {
-            padding: 0 0 5.8rem;
-        }
+        &._isBlue {
+            background: var(--secondary);
 
-        @include respond-to(mobile) {
-            padding: 0 0 3.2rem;
+            .title {
+                color: var(--white);
+            }
         }
     }
 
@@ -38,6 +43,7 @@ export default {
         width: 60%;
         margin: 0 auto 6.4rem;
         text-align: center;
+        color: var(--secondary);
 
         @include respond-to(tablet) {
             margin: 0 auto 4rem;

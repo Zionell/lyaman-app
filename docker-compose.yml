@@ -1,0 +1,87 @@
+version: '3.8'
+
+x-app_environment:
+  environment:
+    - DEBUG
+    - TLS_MODE
+    - SECRET_KEY
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_DATABASE
+    - MYSQL_USER
+    - MYSQL_PASSWORD
+    - MYSQL_PORT
+    - MYSQL_HOST
+    - SITE_HOST
+    - EMAIL_HOST
+    - EMAIL_HOST_USER
+    - EMAIL_HOST_PASSWORD
+    - EMAIL_PORT
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+    ports:
+      - 3333:3306
+    volumes:
+      - db-data:/var/lib/mysql
+
+
+  nginx:
+    volumes:
+      - nginx_cache:/var/lib/nginx/proxy_cache
+      - static:/var/www/static/
+    build:
+      context: ./nginx
+    depends_on:
+      - server
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - HTPASSWD_NODE
+      - HTPASSWD
+      - TLS_MODE
+      - SITE_HOST
+      - ENVIRONMENT
+
+  server:
+    restart: always
+    build:
+      context: ./server
+    environment:
+      - DEBUG=False
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_PORT
+      - MYSQL_HOST
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - static:/app/static/:delegated
+
+  frontend:
+    restart: always
+    build:
+      context: ./client
+    environment:
+      - SERVER_API_URL
+    ports:
+      - 3000:3000
+    volumes:
+      - nuxt:/app/nuxt_volume:delegated
+
+
+volumes:
+  static:
+  db-data:
+  nginx_cache:
+  nuxt:

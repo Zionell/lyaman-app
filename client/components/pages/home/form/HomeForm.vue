@@ -2,8 +2,7 @@
     <section :class="$style.HomeForm">
         <div :class="[$style.wrap, 'container']">
             <div :class="$style.content">
-                <h2 :class="$style.title">{{ data.title }}</h2>
-                <div :class="$style.text" v-html="data.text"/>
+                <h2 :class="$style.title">Остались вопросы? <br> Заполняй форму!</h2>
             </div>
 
             <form :class="$style.form" @submit.prevent="submit">
@@ -26,7 +25,7 @@
                     placeholder="Комментарий ..."
                 />
 
-                <VButton @click="submit">
+                <VButton round @click="submit">
                     Отправить
                 </VButton>
             </form>
@@ -68,6 +67,8 @@ export default {
                 }
                 await this.$axios.$post(this.$api.request, {
                     ...this.formInfo,
+                }, {
+                    withCredentials: false,
                 });
             } catch (e) {
                 console.log(e);
@@ -151,6 +152,8 @@ export default {
     .title {
         @extend .h3;
 
+        color: var(--white);
+
         @include respond-to(tablet) {
             font-size: 3.2rem;
         }
@@ -174,6 +177,7 @@ export default {
         display: grid;
         gap: 3rem;
         padding: 3.2rem 2.4rem;
+        border-radius: 5rem;
         border: 1px solid var(--border);
         background: var(--white);
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);

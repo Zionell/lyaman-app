@@ -1,42 +1,30 @@
 <template>
-    <main :class="$style.IndexPage">
-        <HomeHero id="main" :data="hero"/>
+    <div :class="$style.IndexPage">
+        <HomeHero :data="hero"/>
 
         <SectionTemplate
-            v-if="aboutCourse.steps.length"
-            id="about-course"
-            :title="aboutCourse.title"
+            :title="projectSteps.title"
         >
-            <HomeAboutCourse :data="aboutCourse.steps"/>
+            <HomeAboutCourse :data="projectSteps.steps"/>
         </SectionTemplate>
 
         <SectionTemplate
-            v-if="myWorks.works.length"
-            id="my-works"
-            :title="myWorks.title"
+            :title="workProcess.title"
+            is-blue
         >
-            <HomeMyWorks :data="myWorks.works"/>
+            <HomeWorkProcess :data="workProcess.steps"/>
         </SectionTemplate>
 
-        <SectionTemplate
-            v-if="reviews.length"
-            id="my-works"
-            title="Отзывы"
-        >
-            <HomeReviews :slides="reviews"/>
-        </SectionTemplate>
-
-        <HomeForm id="contacts" :data="form"/>
-    </main>
+        <HomeForm/>
+    </div>
 </template>
 
 <script>
 import HomeHero from '~/components/pages/home/HomeHero';
+import HomeForm from '~/components/pages/home/form/HomeForm';
 import SectionTemplate from '~/components/common/SectionTemplate';
 import HomeAboutCourse from '~/components/pages/home/aboutCourse/HomeAboutCourse';
-import HomeForm from '~/components/pages/home/form/HomeForm';
-import HomeMyWorks from '~/components/pages/home/works/HomeMyWorks';
-import HomeReviews from '~/components/pages/home/HomeReviews';
+import HomeWorkProcess from '~/components/pages/home/workProcess/HomeWorkProcess';
 
 export default {
     name: 'IndexPage',
@@ -45,39 +33,35 @@ export default {
         HomeHero,
         SectionTemplate,
         HomeAboutCourse,
+        HomeWorkProcess,
         HomeForm,
-        HomeReviews,
-        HomeMyWorks,
+        // HomeReviews,
+        // HomeMyWorks,
     },
 
     async asyncData({ app }) {
         const [
-            hero, aboutCourse, reviews, form, myWorks,
+            hero,
+            projectSteps,
+            workProcess,
         ] = await Promise.all([
-            app.$axios.$get(app.$api.hero),
-            app.$axios.$get(app.$api.aboutCourse),
-            app.$axios.$get(app.$api.reviews),
-            app.$axios.$get(app.$api.form),
-            app.$axios.$get(app.$api.myWorks),
+            app.$axios.$get(app.$api.header),
+            app.$axios.$get(app.$api.projectSteps),
+            app.$axios.$get(app.$api.workProcess),
         ]);
 
         return {
             hero: hero || {},
-            aboutCourse: aboutCourse || {},
-            reviews: reviews?.reviews || [],
-            form: form || {},
-            myWorks: myWorks || {},
+            projectSteps: projectSteps || {},
+            workProcess: workProcess || {},
         };
     },
 
     data() {
         return {
             hero: {},
-            about: {},
-            aboutCourse: {},
-            reviews: [],
-            form: {},
-            myWorks: {},
+            projectSteps: {},
+            workProcess: {},
         };
     },
 };

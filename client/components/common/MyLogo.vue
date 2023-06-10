@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" module>
     .MyLogo {
-        color: var(--black);
+        color: var(--white);
         transition: .3s ease-out;
 
         svg {
@@ -47,7 +47,7 @@ export default {
 
         @include hover() {
             &:hover {
-                color: var(--primaryHover);
+                color: var(--grey);
             }
         }
     }

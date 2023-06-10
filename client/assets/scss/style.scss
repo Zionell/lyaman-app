@@ -22,10 +22,15 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1320px;
+    width: 100%;
     margin: 0 auto;
     padding-right: 2rem;
     padding-left: 2rem;
+}
+
+._active-link {
+    color: var(--white);
 }
 
 .link {
