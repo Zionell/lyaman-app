@@ -8,9 +8,6 @@ map $server_port $x_forwarded_host {
     443     $host;
 }
 
-
-# Main Site
-
 <% if [ "$TLS_MODE" != "off" ]; then -%>
     server {
         server_name <%= $SITE_HOST %>;
@@ -48,28 +45,10 @@ server {
 
     error_page 497 https://$host:$server_port$request_uri;
 
-    <% if [ "$ENVIRONMENT" = "production" ]; then -%>
-
-        location /static/ {
-            alias /app/static/;
-            expires 365d;
-        }
-
-        location /s/ {
-            alias /var/www/static/;
-            expires 365d;
-        }
-
-        location /n/ {
-            alias /var/www/nuxt/;
-            expires 365d;
-        }
-    <% else -%>
-        location /static/ {
-            include backend;
-        }
-    <% fi; -%>
-
+    location /static/ {
+        alias /app/static/;
+        expires 365d;
+    }
 
     location /api/ {
         include backend;
@@ -84,17 +63,12 @@ server {
         root /var/www/local_static/;
     }
 
-        <% if [ "$ENVIRONMENT" = "production" ]; then -%>
-	    location @frontend {
-            include frontend;
-	    }
+    location @frontend {
+        include frontend;
+    }
 
-	    location / {
-            <% if [ "$HTPASSWD_NODE" != "off" ]; then -%>
-            auth_basic "Restricted Content";
-            auth_basic_user_file /etc/nginx/.htpasswd;
-            <% fi; -%>
-	        root /var/www/local_static/;
-	        try_files $uri @frontend;
-	    }
-    <% fi; -%>
+    location / {
+        root /var/www/local_static/;
+        try_files $uri @frontend;
+    }
+}
