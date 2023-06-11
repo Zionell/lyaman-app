@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+from os import getenv
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("MYSQL_DATABASE"),
-        "USER": os.environ.get("MYSQL_USER"),
-        "PASSWORD": os.environ.get("MYSQL_PASSWORD"),
-        "HOST": os.environ.get('MYSQL_HOST'),
-        "PORT": os.environ.get("MYSQL_PORT"),
+        "NAME": getenv("MYSQL_DATABASE"),
+        "USER": getenv("MYSQL_USER"),
+        "PASSWORD": getenv("MYSQL_PASSWORD"),
+        "HOST": getenv('MYSQL_HOST'),
+        "PORT": getenv("MYSQL_PORT"),
         "CONN_MAX_AGE": 600,
     }
 }
@@ -137,9 +137,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT='static'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
