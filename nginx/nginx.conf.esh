@@ -50,6 +50,11 @@ server {
 
     <% if [ "$ENVIRONMENT" = "production" ]; then -%>
 
+        location /static/ {
+            alias /app/static/;
+            expires 365d;
+        }
+
         location /s/ {
             alias /var/www/static/;
             expires 365d;
@@ -60,7 +65,7 @@ server {
             expires 365d;
         }
     <% else -%>
-        location /s/ {
+        location /static/ {
             include backend;
         }
     <% fi; -%>
@@ -93,5 +98,3 @@ server {
 	        try_files $uri @frontend;
 	    }
     <% fi; -%>
-
-}

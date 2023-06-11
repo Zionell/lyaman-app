@@ -6,6 +6,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - 3306:3306
     volumes:
       - db-data:/var/lib/mysql
 
@@ -32,6 +34,8 @@ services:
       - .env
     depends_on:
       - db
+    ports:
+      - 8000:8000
     volumes:
       - static:/app/static/
 
@@ -41,6 +45,8 @@ services:
       context: ./client
     env_file:
       - .env
+    ports:
+      - 3000:3000
     volumes:
       - nuxt:/app/nuxt_volume:delegated
 
