@@ -1,14 +1,16 @@
 <template>
     <div :class="$style.IndexPage">
-        <HomeHero :data="hero"/>
+        <HomeHero v-if="hero && hero.title" :data="hero"/>
 
         <SectionTemplate
+            v-if="projectSteps && projectSteps.steps"
             :title="projectSteps.title"
         >
             <HomeAboutCourse :data="projectSteps.steps"/>
         </SectionTemplate>
 
         <SectionTemplate
+            v-if="workProcess && workProcess.steps"
             :title="workProcess.title"
             is-blue
         >
@@ -35,26 +37,28 @@ export default {
         HomeAboutCourse,
         HomeWorkProcess,
         HomeForm,
-        // HomeReviews,
-        // HomeMyWorks,
     },
 
     async asyncData({ app }) {
-        const [
-            hero,
-            projectSteps,
-            workProcess,
-        ] = await Promise.all([
-            app.$axios.$get(app.$api.header),
-            app.$axios.$get(app.$api.projectSteps),
-            app.$axios.$get(app.$api.workProcess),
-        ]);
+        try {
+            const [
+                hero,
+                projectSteps,
+                workProcess,
+            ] = await Promise.all([
+                app.$axios.$get(app.$api.header),
+                app.$axios.$get(app.$api.projectSteps),
+                app.$axios.$get(app.$api.workProcess),
+            ]);
 
-        return {
-            hero: hero || {},
-            projectSteps: projectSteps || {},
-            workProcess: workProcess || {},
-        };
+            return {
+                hero: hero || {},
+                projectSteps: projectSteps || {},
+                workProcess: workProcess || {},
+            };
+        } catch (e) {
+            console.warn(e);
+        }
     },
 
     data() {

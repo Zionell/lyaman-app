@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 
 services:
   db:
@@ -11,11 +11,15 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-
   nginx:
     volumes:
       - nginx_cache:/var/lib/nginx/proxy_cache
-      - static:/app/static/
+      - static:/app/www/static/
+      - local_static:/var/www/local_static/
+      - nuxt:/var/www/nuxt:ro
+      - static:/var/www/static/:ro
+      - acme.sh:/acme.sh:delegated
+      - certs:/etc/nginx/certs
     build:
       context: ./nginx
     depends_on:
@@ -45,6 +49,7 @@ services:
     restart: always
     build:
       context: ./client
+    command: npm run start
     env_file:
       - .env
     ports:
@@ -54,7 +59,10 @@ services:
 
 
 volumes:
+  nginx_cache:
+  local_static:
   static:
   db-data:
-  nginx_cache:
   nuxt:
+  acme.sh:
+  certs:

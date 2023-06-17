@@ -1,5 +1,5 @@
 <template>
-    <header :class="[$style.TheHeader, {[$style._fixed]: !isVisible}]">
+    <header :class="$style.TheHeader">
         <div :class="[$style.wrap, 'container']">
             <SvgIcon
                 ref="logo"
@@ -35,9 +35,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import headerVisibility from '~/mixins/headerVisibility';
 import TheBurger from '~/components/layouts/header/TheBurger';
-import { gsap } from 'gsap';
 import VButton from '~/components/ui/button/VButton';
 
 export default {
@@ -47,8 +45,6 @@ export default {
         TheBurger,
         VButton,
     },
-
-    mixins: [headerVisibility],
 
     data() {
         return {
@@ -61,33 +57,6 @@ export default {
             menuItems: state => state.general.menuItems,
         }),
     },
-
-    mounted() {
-        this.$nextTick(() => {
-            // this.initialAnimation();
-        });
-    },
-
-    methods: {
-        initialAnimation() {
-            gsap.from(this.$refs?.logo, {
-                x: -1000,
-                duration: 1,
-            });
-            gsap.from('.button', {
-                x: 1000,
-                duration: 1,
-            });
-            // gsap.from('.navItem', {
-            //     x: 100,
-            //     duration: 3,
-            //     stagger: 0.3,
-            // });
-            // gsap.utils.toArray('.navItem')
-            //     .forEach((item, ind) => {
-            //     });
-        },
-    },
 };
 </script>
 
@@ -99,21 +68,6 @@ export default {
         height: $h-height;
         background: var(--white);
         transition: $transition;
-
-        &._fixed {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            z-index: 10;
-            width: 100%;
-            height: auto;
-
-            .wrap {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-            }
-        }
 
         & .btn {
             @include respond-to(mobile) {
