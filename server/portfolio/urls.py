@@ -18,17 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+from certificates.views import CertificatesPageApiView
 from contacts.views import ContactsApiView
 from header.views import HeaderAPIView
 from menuItems.views import MenuItemsApiView
 from projectStepsPage.views import ProjectStepsApiView
 from request.views import RequestApiView
+from reviews.views import ReviewsPageApiView
 from workProcessPage.views import WorkProcessPageApiView
 
 router = DefaultRouter()
 
 router.register(r"project_steps", ProjectStepsApiView, basename="project_steps")
 router.register(r"work_process", WorkProcessPageApiView, basename="work_process")
+router.register(r"certificates", CertificatesPageApiView, basename="certificates")
+router.register(r"reviews", ReviewsPageApiView, basename="reviews")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

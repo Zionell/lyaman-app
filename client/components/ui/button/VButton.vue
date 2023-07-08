@@ -5,12 +5,17 @@
         v-bind="$attrs"
         @click.prevent="$emit('click')"
     >
-        <slot></slot>
-        <SvgIcon
-            v-if="icon"
-            :class="$style.icon"
-            :name="icon"
-        />
+        <transition name="fade" mode="out-in">
+            <VLoader v-if="isLoading"/>
+            <div v-else :class="$style.wrap">
+                <slot></slot>
+                <SvgIcon
+                    v-if="icon"
+                    :class="$style.icon"
+                    :name="icon"
+                />
+            </div>
+        </transition>
     </component>
 </template>
 
@@ -23,6 +28,12 @@ export default {
             type: String,
             default: 'button',
             validator: () => ['button', 'div', 'a', 'nuxt-link'],
+        },
+
+        color: {
+            type: String,
+            default: 'primary',
+            validator: () => ['primary', 'secondary'],
         },
 
         type: {
@@ -45,6 +56,11 @@ export default {
             type: Boolean,
             default: false,
         },
+
+        isLoading: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     computed: {
@@ -53,6 +69,7 @@ export default {
                 [this.$style[this.type]]: this.type,
                 [this.$style['is-disabled']]: this.disabled,
                 [this.$style['is-round']]: this.round,
+                [this.$style['is-loading']]: this.isLoading,
             };
         },
     },
@@ -64,6 +81,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
         padding: 1rem 2rem;
         border: 1px solid var(--primary);
         background: var(--primary);
@@ -79,14 +97,25 @@ export default {
             height: 5rem;
             padding: 0;
             border-radius: 50%;
+            border: 1px solid var(--white);
+            background: var(--white);
+            color: var(--primary);
 
             .icon {
                 width: 3rem;
                 height: 3rem;
                 margin-left: 0;
             }
+
+            @include hover() {
+                &:hover {
+                    background: var(--primary);
+                    color: var(--white);
+                }
+            }
         }
 
+        &.is-loading,
         &.is-disabled {
             pointer-events: none;
             opacity: .6;
@@ -107,6 +136,13 @@ export default {
             padding: .4rem 1rem;
             font-size: 1.4rem;
         }
+    }
+
+    .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
     }
 
     .icon {

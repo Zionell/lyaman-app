@@ -46,7 +46,7 @@ server {
     error_page 497 https://$host:$server_port$request_uri;
 
     location /static/ {
-        alias /app/static/;
+        alias /app/www/static/;
         expires 365d;
     }
 

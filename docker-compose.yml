@@ -3,7 +3,6 @@ version: '3.3'
 services:
   db:
     image: mysql:latest
-    restart: always
     env_file:
       - .env
     ports:
@@ -42,8 +41,6 @@ services:
       - static:/app/static/
     entrypoint: ./entrypoint.sh
     command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - 8000:8000
 
   frontend:
     restart: always
@@ -52,8 +49,6 @@ services:
     command: npm run start
     env_file:
       - .env
-    ports:
-      - 3000:3000
     volumes:
       - nuxt:/app/nuxt_volume:delegated
 

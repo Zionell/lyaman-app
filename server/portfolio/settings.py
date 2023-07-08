@@ -17,16 +17,17 @@ from dotenv import load_dotenv
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SITE_HOST = getenv("SITE_HOST")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [f"https://{SITE_HOST}"]
 
 # Application definition
 
@@ -49,11 +50,14 @@ INSTALLED_APPS = [
     'workProcessPage.apps.WorkProcessPageConfig',
     'request.apps.RequestConfig',
     'menuItems.apps.MenuItemsConfig',
+    'certificates.apps.CertificatesPageConfig',
+    'reviews.apps.ReviewsPageConfig'
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
+    'https://lyaman-askerova.kz',
 ]
 
 CSRF_COOKIE_SECURE = False
@@ -95,11 +99,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": getenv("MYSQL_DATABASE"),
-        "USER": getenv("MYSQL_USER"),
-        "PASSWORD": getenv("MYSQL_PASSWORD"),
-        "HOST": getenv('MYSQL_HOST'),
-        "PORT": getenv("MYSQL_PORT"),
+        "NAME": getenv("DB_DATABASE"),
+        "USER": getenv("DB_USER"),
+        "PASSWORD": getenv("DB_PASSWORD"),
+        "HOST": getenv('DB_HOST'),
+        "PORT": getenv("DB_PORT"),
         "CONN_MAX_AGE": 600,
     }
 }
@@ -204,9 +208,9 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = getenv('EMAIL_BACKEND')
+EMAIL_USE_SSL = getenv('EMAIL_USE_SSL')
+EMAIL_HOST = getenv('EMAIL_HOST')
+EMAIL_PORT = getenv('EMAIL_PORT')
+EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')

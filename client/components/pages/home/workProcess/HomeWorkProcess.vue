@@ -29,10 +29,18 @@ export default {
 
 <style lang="scss" module>
     .HomeWorkProcess {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(1rem, 26rem));
+        display: flex;
         justify-content: center;
         gap: 3.2rem;
+
+        @include respond-to(mobile) {
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+    }
+
+    .item {
+        width: 26rem;
     }
 
     .itemTop {
@@ -47,6 +55,11 @@ export default {
             margin-right: 2.4rem;
             border-radius: 50%;
             background: var(--white);
+
+            @include respond-to(mobile) {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
         }
 
         &:after {
@@ -62,11 +75,19 @@ export default {
 
         margin: 1.6rem 0 .4rem;
         color: var(--white);
+
+        @include respond-to(mobile) {
+            font-size: 1.8rem;
+        }
     }
 
     .itemText {
         @extend .p16;
 
         color: var(--white);
+
+        @include respond-to(mobile) {
+            font-size: 1.4rem;
+        }
     }
 </style>

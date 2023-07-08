@@ -1,12 +1,10 @@
 import json
-import os
+from os import getenv
 
 from django.core.mail import send_mail
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Request
 from .serializers import RequestSerializer
 
 
@@ -18,10 +16,18 @@ def send(data):
                    '<p>Тебе поступила заявка на консультацию от ' \
                    + mail_info['name'] + '.</p>' \
                    '<p>Комментарий к сообщению от пользователя ' \
-                   + mail_info['comment'] + '.</p>'
-    from_email = mail_info['email']
-    recipient_list = [os.environ.get('EMAIL_HOST_USER')]
-    send_mail(subject, message, from_email, recipient_list, html_message=html_message)
+                   + mail_info['comment'] + '.</p>' \
+                   '<p>Почта: ' \
+                   + mail_info['email'] + '.</p>'
+    from_email = getenv('EMAIL_HOST_USER')
+    recipient_list = [getenv('EMAIL_HOST_USER')]
+
+    try:
+        send_mail(subject, message, from_email, recipient_list, html_message=html_message)
+        print('sent')
+    except Exception as _ex:
+        print(_ex)
+        return f"{_ex}"
 
 
 class RequestApiView(APIView):

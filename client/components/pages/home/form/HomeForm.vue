@@ -4,31 +4,63 @@
             <div :class="$style.content">
                 <h2 :class="$style.title">Остались вопросы? <br> Заполняй форму!</h2>
             </div>
+            <div :class="$style.formWrap">
+                <transition name="fade" mode="out-in">
+                    <div v-if="isSuccess" :class="$style.formResult">
+                        <SvgIcon
+                            :class="$style.icon"
+                            name="success"
+                        />
+                        <h3 :class="[$style.resultTitle, 'h4']">Успешно</h3>
+                    </div>
+                    <div v-else-if="isError" :class="$style.formResult">
+                        <SvgIcon
+                            :class="$style.icon"
+                            name="cross"
+                        />
+                        <h3 :class="[$style.resultTitle, 'h4']">Ошибка</h3>
 
-            <form :class="$style.form" @submit.prevent="submit">
-                <VInput
-                    v-model="formInfo.name"
-                    :error="error.name"
-                    label-value="Ваше имя"
-                    placeholder="Введите ваше имя"
-                />
-                <VInput
-                    v-model="formInfo.email"
-                    :error="error.email"
-                    label-value="Ваш email"
-                    placeholder="Введите ваш email"
-                />
-                <VInput
-                    v-model="formInfo.comment"
-                    type="textarea"
-                    label-value="Комментарий"
-                    placeholder="Комментарий ..."
-                />
+                        <VButton
+                            round
+                            @click="isError = false"
+                        >
+                            Повторить
+                        </VButton>
+                    </div>
+                    <form
+                        v-else
+                        :class="$style.form"
+                        @submit.prevent="submit"
+                    >
+                        <VInput
+                            v-model="formInfo.name"
+                            :error="error.name"
+                            label-value="Ваше имя"
+                            placeholder="Введите ваше имя"
+                        />
+                        <VInput
+                            v-model="formInfo.email"
+                            :error="error.email"
+                            label-value="Ваш email"
+                            placeholder="Введите ваш email"
+                        />
+                        <VInput
+                            v-model="formInfo.comment"
+                            type="textarea"
+                            label-value="Комментарий"
+                            placeholder="Комментарий ..."
+                        />
 
-                <VButton round @click="submit">
-                    Отправить
-                </VButton>
-            </form>
+                        <VButton
+                            :is-loading="isLoading"
+                            round
+                            @click="submit"
+                        >
+                            Отправить
+                        </VButton>
+                    </form>
+                </transition>
+            </div>
         </div>
     </section>
 </template>
@@ -46,6 +78,10 @@ export default {
 
     data() {
         return {
+            isLoading: false,
+            isSuccess: false,
+            isError: false,
+            timer: null,
             formInfo: {
                 name: '',
                 email: '',
@@ -59,9 +95,17 @@ export default {
         };
     },
 
+    beforeDestroy() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+        }
+    },
+
     methods: {
         async submit() {
             try {
+                this.isLoading = true;
                 if (this.checkError()) {
                     return;
                 }
@@ -70,9 +114,20 @@ export default {
                 }, {
                     withCredentials: false,
                 });
+                this.isSuccess = true;
+                this.setTimer();
             } catch (e) {
-                console.log(e);
+                console.warn(e);
+                this.isError = true;
+            } finally {
+                this.isLoading = true;
             }
+        },
+
+        setTimer() {
+            this.timer = setTimeout(() => {
+                this.isSuccess = false;
+            }, 3000);
         },
 
         checkError() {
@@ -173,18 +228,44 @@ export default {
         }
     }
 
-    .form {
-        display: grid;
-        gap: 3rem;
+    .formWrap {
+        height: 50rem;
         padding: 3.2rem 2.4rem;
-        border-radius: 5rem;
+        border-radius: 3rem;
         border: 1px solid var(--border);
         background: var(--white);
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
 
         @include respond-to(tablet) {
-            gap: 2rem;
             padding: 2.1rem 1.8rem;
+        }
+    }
+
+    .formResult {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .resultTitle {
+        margin: 3.6rem 0;
+    }
+
+    .icon {
+        width: 7.4rem;
+        height: 7.4rem;
+        color: var(--primary);
+    }
+
+    .form {
+        display: grid;
+        gap: 3rem;
+        height: 100%;
+
+        @include respond-to(tablet) {
+            gap: 2rem;
         }
     }
 </style>

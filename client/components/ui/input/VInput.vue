@@ -61,6 +61,10 @@ export default {
         position: relative;
         display: grid;
         gap: .4rem;
+
+        @include respond-to(mobile) {
+            font-size: 1.4rem;
+        }
     }
 
     .input,
@@ -68,7 +72,7 @@ export default {
         @extend .p14;
 
         padding: .9rem 1.8rem;
-        border-radius: 3rem;
+        border-radius: 2rem;
         border: 1px solid var(--border);
     }
 

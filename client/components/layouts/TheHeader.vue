@@ -20,10 +20,9 @@
 
             <VButton
                 :class="[$style.btn, 'button']"
-                tag="nuxt-link"
-                to="#contacts"
                 icon="arrow-right"
                 round
+                @click="goToContacts"
             >
                 Написать мне
             </VButton>
@@ -37,6 +36,7 @@
 import { mapState } from 'vuex';
 import TheBurger from '~/components/layouts/header/TheBurger';
 import VButton from '~/components/ui/button/VButton';
+import { scrollTo } from '~/assets/js/common';
 
 export default {
     name: 'TheHeader',
@@ -57,16 +57,25 @@ export default {
             menuItems: state => state.general.menuItems,
         }),
     },
+
+    methods: {
+        goToContacts() {
+            scrollTo('contacts');
+        },
+    },
 };
 </script>
 
 <style lang="scss" module>
     .TheHeader {
+        position: sticky;
+        top: 0;
+        z-index: 10;
         overflow: hidden;
         display: flex;
         align-items: center;
         height: $h-height;
-        background: var(--white);
+        background: linear-gradient(180deg, var(--secondary) 0%, rgba(#2d60a2, .2) 100%);
         transition: $transition;
 
         & .btn {
@@ -75,14 +84,8 @@ export default {
             }
         }
 
-        @include respond-to(tablet) {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            height: auto;
-        }
-
         @include respond-to(mobile) {
+            height: $h-height-mobile;
             background: var(--secondary);
         }
     }

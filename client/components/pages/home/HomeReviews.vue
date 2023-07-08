@@ -1,6 +1,7 @@
 <template>
     <div :class="$style.HomeReviews">
         <VButton
+            v-if="slider"
             :class="[$style.btn, $style._prev]"
             type="slider"
             icon="left"
@@ -15,22 +16,19 @@
         >
             <div class="swiper-wrapper">
                 <div
-                    v-for="(slide, idx) in slides"
-                    :key="idx"
+                    v-for="review in data"
+                    :key="review.id"
                     class="swiper-slide"
                     :class="$style.review"
                 >
-                    <div :class="$style.reviewText" v-html="slide.review"/>
-                    <div :class="$style.reviewAuthor" v-html="slide.name"/>
+                    <div :class="$style.reviewText" v-html="review.text"/>
+                    <div :class="$style.reviewAuthor" v-html="review.title"/>
                 </div>
             </div>
-            <div
-                ref="pagination"
-                :class="$style.bullets"
-            />
         </div>
 
         <VButton
+            v-if="slider"
             :class="[$style.btn, $style._next]"
             type="slider"
             icon="right"
@@ -45,7 +43,7 @@ export default {
     name: 'HomeReviews',
 
     props: {
-        slides: {
+        data: {
             type: Array,
             default: () => [],
         },
@@ -78,11 +76,6 @@ export default {
                 slidesPerView: 1,
                 spaceBetween: 100,
                 speed: 800,
-
-                pagination: {
-                    el: this.$refs.pagination,
-                    type: 'bullets',
-                },
             });
         },
     },
@@ -100,41 +93,32 @@ export default {
         position: relative;
         overflow: hidden;
         width: 100%;
-
-        .bullets {
-            position: absolute;
-            bottom: 1rem;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-
-            :global(.swiper-pagination-bullet) {
-                width: 5rem;
-                height: .4rem;
-                border-radius: 0;
-
-                &:not(:last-child) {
-                    margin-right: 1rem;
-                }
-            }
-
-            :global(.swiper-pagination-bullet-active) {
-                background: var(--primary);
-            }
-        }
     }
 
     .review {
         padding: 7rem;
         border-radius: 2rem;
-        background: var(--secondary);
+        background: var(--white);
         user-select: none;
+
+        @include respond-to(tablet) {
+            padding: 3.6rem;
+        }
+
+        @include respond-to(mobile) {
+            padding: 1.8rem;
+        }
     }
 
     .reviewText {
         font-family: "Roboto", sans-serif;
         font-size: 2.4rem;
         line-height: 3.6rem;
+
+        @include respond-to(mobile) {
+            font-size: 1.8rem;
+            line-height: 2.4rem;
+        }
     }
 
     .reviewAuthor {
@@ -142,19 +126,37 @@ export default {
         padding-top: 2.3rem;
         padding-left: 7rem;
         font-size: 2.4rem;
-        color: #333;
-    }
+        color: var(--grey);
 
-    .reviewAuthor:before {
-        content: "";
-        position: absolute;
-        top: 65%;
-        left: 0;
-        display: block;
-        width: 6rem;
-        height: 3px;
-        margin-top: 1px;
-        background-color: var(--primary);
+        &:before {
+            content: "";
+            position: absolute;
+            top: 65%;
+            left: 0;
+            display: block;
+            width: 6rem;
+            height: 3px;
+            margin-top: 1px;
+            background-color: var(--primary);
+        }
+
+        @include respond-to(tablet) {
+            padding-left: 5rem;
+
+            &:before {
+                width: 3.6rem;
+            }
+        }
+
+        @include respond-to(mobile) {
+            padding-top: 1.2rem;
+            padding-left: 4rem;
+            font-size: 1.4rem;
+
+            &:before {
+                width: 2.4rem;
+            }
+        }
     }
 
     .btn {

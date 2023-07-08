@@ -5,4 +5,6 @@ export default {
     request: '/api/v1/request/',
     contacts: '/api/v1/contacts/',
     menuItems: '/api/v1/menu_items/',
+    certificates: '/api/v1/certificates/',
+    reviews: '/api/v1/reviews/',
 };

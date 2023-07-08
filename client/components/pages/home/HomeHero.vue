@@ -26,9 +26,8 @@
             <div :class="$style.text" v-html="data.text"/>
 
             <VButton
-                tag="nuxt-link"
-                to="#contacts"
                 round
+                @click="goToContacts"
             >
                 {{ data.btnText }}
             </VButton>
@@ -38,6 +37,7 @@
 
 <script>
 import VButton from '~/components/ui/button/VButton';
+import { scrollTo } from '~/assets/js/common';
 
 export default {
     name: 'HomeHero',
@@ -52,6 +52,12 @@ export default {
             default: () => ({}),
         },
     },
+
+    methods: {
+        goToContacts() {
+            scrollTo('contacts');
+        },
+    },
 };
 </script>
 
@@ -62,47 +68,114 @@ export default {
         align-items: center;
         justify-content: space-between;
         gap: 10rem;
-        height: calc(100vh - $h-height);
+        min-height: calc(100vh - $h-height);
         padding-top: 1.6rem;
         padding-bottom: 1.6rem;
+
+        @include respond-to(tablet) {
+            grid-template-columns: 1fr;
+            gap: 3.2rem;
+            padding-top: 4.8rem;
+            padding-bottom: 4.8rem;
+        }
+
+        @include respond-to(mobile) {
+            gap: 2.4rem;
+            min-height: calc(100vh - $h-height-mobile);
+            padding-top: 2.4rem;
+            padding-bottom: 2.4rem;
+        }
     }
 
     .content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
+        @include respond-to(tablet) {
+            order: 1;
+        }
     }
 
     .title {
         @extend .h1;
+
+        @include respond-to(tablet) {
+            font-size: 3.2rem;
+            line-height: 120%;
+        }
+
+        @include respond-to(mobile) {
+            font-size: 2.4rem;
+        }
     }
 
     .text {
         @extend .p24;
 
         padding: 4rem 0;
+
+        @include respond-to(tablet) {
+            padding: 2.4rem 0;
+            font-size: 1.8rem;
+            line-height: 144%;
+        }
+
+        @include respond-to(mobile) {
+            padding: 1.2rem 0;
+            font-size: 1.4rem;
+        }
     }
 
     .left {
         display: grid;
         grid-template-rows: 1fr 7.2rem;
         gap: 2.4rem;
+
+        @include respond-to(tablet) {
+            grid-template-rows: 7.2rem 1fr;
+            order: 2;
+            height: 100%;
+        }
+
+        @include respond-to(mobile) {
+            grid-template-rows: 1fr 3.2rem;
+        }
     }
 
     .imgWrap {
         padding: 2rem;
-        border-radius: 5rem;
+        border-radius: 3rem;
         border: 5px solid var(--secondary);
+
+        @include respond-to(tablet) {
+            order: 2;
+            height: 75rem;
+        }
+
+        @include respond-to(mobile) {
+            order: 1;
+            height: 28rem;
+            padding: .8rem;
+        }
     }
 
     .image {
-        border-radius: 5rem;
+        border-radius: 2rem;
     }
 
     .tags {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: .5rem;
+
+        @include respond-to(tablet) {
+            order: 1;
+        }
+
+        @include respond-to(mobile) {
+            order: 2;
+        }
     }
 
     .tag {
@@ -114,5 +187,10 @@ export default {
         border-radius: 5rem;
         border: 5px solid var(--secondary);
         color: var(--secondary);
+
+        @include respond-to(mobile) {
+            font-size: 1.6rem;
+            line-height: 144%;
+        }
     }
 </style>

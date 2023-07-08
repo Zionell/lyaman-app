@@ -51,12 +51,16 @@ export default {
 
     .content {
         height: 100%;
-        padding: 2.8rem 3.2rem;
-        border-radius: 5rem;
+        padding: 3.2rem;
+        border-radius: 3rem;
         background: linear-gradient(162deg, #8b9bdc 0%, rgba(255, 255, 255, 0) 56%);
 
         @include respond-to(tablet) {
-            padding: 1.8rem 2.4rem;
+            padding: 2.4rem;
+        }
+
+        @include respond-to(mobile) {
+            padding: 1.8rem;
         }
     }
 
@@ -64,9 +68,18 @@ export default {
         @extend .p24b;
 
         margin-bottom: 1.6rem;
+
+        @include respond-to(mobile) {
+            margin-bottom: .8rem;
+            font-size: 1.8rem;
+        }
     }
 
     .text {
         @extend .p16;
+
+        @include respond-to(mobile) {
+            font-size: 1.4rem;
+        }
     }
 </style>

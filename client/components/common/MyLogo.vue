@@ -1,6 +1,6 @@
 <template>
     <a
-        href="https://askarov-portfolio.ru/"
+        href="https://askarov.dev/"
         target="_blank"
         :class="$style.MyLogo"
     >
