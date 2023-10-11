@@ -144,6 +144,7 @@ export default {
     }
 
     .imgWrap {
+        height: 50rem;
         padding: 2rem;
         border-radius: 3rem;
         border: 5px solid var(--secondary);

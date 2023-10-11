@@ -29,6 +29,7 @@ from workProcessPage.views import WorkProcessPageApiView
 
 router = DefaultRouter()
 
+router.register(r"header", HeaderAPIView, basename="header")
 router.register(r"project_steps", ProjectStepsApiView, basename="project_steps")
 router.register(r"work_process", WorkProcessPageApiView, basename="work_process")
 router.register(r"certificates", CertificatesPageApiView, basename="certificates")
@@ -37,7 +38,6 @@ router.register(r"reviews", ReviewsPageApiView, basename="reviews")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/v1/", include(router.urls)),
-    path('api/v1/header/', HeaderAPIView.as_view()),
     path('api/v1/contacts/', ContactsApiView.as_view()),
     path('api/v1/request/', RequestApiView.as_view()),
     path('api/v1/menu_items/', MenuItemsApiView.as_view()),

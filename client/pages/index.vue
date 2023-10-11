@@ -24,13 +24,13 @@
             <HomeCertificates :data="certificates.certs"/>
         </SectionTemplate>
 
-        <SectionTemplate
-            v-if="reviews && reviews.review"
-            :title="reviews.title"
-            is-blue
-        >
-            <HomeReviews :data="reviews.review"/>
-        </SectionTemplate>
+        <!--        <SectionTemplate-->
+        <!--            v-if="reviews && reviews.review"-->
+        <!--            :title="reviews.title"-->
+        <!--            is-blue-->
+        <!--        >-->
+        <!--            <HomeReviews :data="reviews.review"/>-->
+        <!--        </SectionTemplate>-->
 
         <HomeForm id="contacts"/>
     </div>
@@ -43,7 +43,7 @@ import SectionTemplate from '~/components/common/SectionTemplate';
 import HomeAboutCourse from '~/components/pages/home/aboutCourse/HomeAboutCourse';
 import HomeWorkProcess from '~/components/pages/home/workProcess/HomeWorkProcess';
 import HomeCertificates from '~/components/pages/HomeCertificates';
-import HomeReviews from '~/components/pages/home/HomeReviews';
+// import HomeReviews from '~/components/pages/home/HomeReviews';
 
 export default {
     name: 'IndexPage',
@@ -55,7 +55,7 @@ export default {
         HomeWorkProcess,
         HomeForm,
         HomeCertificates,
-        HomeReviews,
+        // HomeReviews,
     },
 
     async asyncData({ app }) {
@@ -65,13 +65,13 @@ export default {
                 projectSteps,
                 workProcess,
                 certificates,
-                reviews,
+                // reviews,
             ] = await Promise.all([
                 app.$axios.$get(app.$api.header),
                 app.$axios.$get(app.$api.projectSteps),
                 app.$axios.$get(app.$api.workProcess),
                 app.$axios.$get(app.$api.certificates),
-                app.$axios.$get(app.$api.reviews),
+                // app.$axios.$get(app.$api.reviews),
             ]);
 
             return {
@@ -79,7 +79,7 @@ export default {
                 projectSteps: projectSteps || {},
                 workProcess: workProcess || {},
                 certificates: certificates || {},
-                reviews: reviews || {},
+                // reviews: reviews || {},
             };
         } catch (e) {
             console.warn(e);

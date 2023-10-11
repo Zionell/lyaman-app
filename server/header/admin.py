@@ -3,4 +3,6 @@ from solo.admin import SingletonModelAdmin
 
 from .models import Header
 
-admin.site.register(Header, SingletonModelAdmin)
+@admin.register(Header)
+class HeaderPageAdmin(SingletonModelAdmin):
+    ...

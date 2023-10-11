@@ -98,13 +98,12 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": getenv("DB_DATABASE"),
-        "USER": getenv("DB_USER"),
-        "PASSWORD": getenv("DB_PASSWORD"),
-        "HOST": getenv('DB_HOST'),
-        "PORT": getenv("DB_PORT"),
-        "CONN_MAX_AGE": 600,
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": getenv("POSTGRES_DATABASE"),
+        "USER": getenv("POSTGRES_USER"),
+        "PASSWORD": getenv("POSTGRES_PASSWORD"),
+        "HOST": getenv('POSTGRES_HOST'),
+        "PORT": getenv("POSTGRES_PORT"),
     }
 }
 

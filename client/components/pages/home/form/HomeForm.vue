@@ -22,7 +22,7 @@
 
                         <VButton
                             round
-                            @click="isError = false"
+                            @click="repeatRequest"
                         >
                             Повторить
                         </VButton>
@@ -120,14 +120,20 @@ export default {
                 console.warn(e);
                 this.isError = true;
             } finally {
-                this.isLoading = true;
+                this.isLoading = false;
             }
         },
 
         setTimer() {
             this.timer = setTimeout(() => {
                 this.isSuccess = false;
+                this.isLoading = false;
             }, 3000);
+        },
+
+        repeatRequest() {
+            this.isError = false;
+            this.isLoading = false;
         },
 
         checkError() {

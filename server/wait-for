@@ -6,8 +6,8 @@ from socket import socket, AF_INET, SOCK_STREAM
 from time import sleep
 
 tries: int = 0
-host: str = str(getenv("MYSQL_HOST", "db"))
-port: int = int(getenv("MYSQL_PORT", "3306"))
+host: str = str(getenv("POSTGRES_HOST", "db"))
+port: int = int(getenv("POSTGRES_PORT", "5432"))
 
 sock: socket = socket(AF_INET, SOCK_STREAM)
 

@@ -2,13 +2,12 @@ version: '3.3'
 
 services:
   db:
-    image: mysql:latest
+    image: postgres
+    restart: always
     env_file:
       - .env
-    ports:
-      - 3306:3306
     volumes:
-      - db-data:/var/lib/mysql
+      - postgresdata:/var/lib/postgresql/data
 
   nginx:
     volumes:
@@ -57,7 +56,7 @@ volumes:
   nginx_cache:
   local_static:
   static:
-  db-data:
+  postgresdata:
   nuxt:
   acme.sh:
   certs:

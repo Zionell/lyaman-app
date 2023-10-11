@@ -26,7 +26,7 @@ class Certificates(models.Model):
     )
     text = models.CharField(verbose_name="название сертификата", max_length=255)
     image = models.ImageField(
-        verbose_name="Изображение", upload_to="static/images/certificates", blank=True, null=True
+        verbose_name="Изображение", upload_to="static/images/certificates/", blank=True, null=True
     )
     order = models.PositiveSmallIntegerField(
         verbose_name="Порядок",
