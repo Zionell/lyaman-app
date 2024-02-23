@@ -5,8 +5,10 @@ import { proxy } from './config/proxy';
 require('dotenv')
     .config();
 
-const isDev = process.env.NODE_ENV === 'development';
-const base_url = process.env.SERVER_API_URL;
+const env = {
+    IS_DEV: process.env.NODE_ENV === 'development',
+    SERVER_API_URL: process.env.SERVER_API_URL,
+};
 
 export default {
     loadingIndicator: {
@@ -84,13 +86,13 @@ export default {
     ],
 
     image: {
-        domains: [base_url, 'https://lyaman-askerova.kz'],
+        domains: [env.SERVER_API_URL, 'https://lyaman-askerova.kz'],
         providers: {
             customProvider: {
                 name: 'customProvider',
                 provider: '~/assets/js/imageProvider',
                 options: {
-                    baseURL: base_url,
+                    baseURL: env.SERVER_API_URL,
                 },
             },
         },
@@ -100,17 +102,17 @@ export default {
 
     axios: {
         proxy: true,
-        baseURL: base_url,
+        baseURL: env.SERVER_API_URL,
         withCredentials: false,
     },
 
     build: {
         publicPath: '/n/',
 
-        analyze: isDev,
+        analyze: env.IS_DEV,
 
         // Set libraries to transpile by babel
-        transpile: !isDev && [],
+        transpile: !env.IS_DEV && [],
 
         // You can extend webpack config here
         babel: {},
@@ -127,7 +129,7 @@ export default {
         extractCss: true,
 
         // Terser settings
-        terser: !isDev && {
+        terser: !env.IS_DEV && {
             terserOptions: {
                 mangle: {
                     safari10: true,
@@ -136,7 +138,7 @@ export default {
         },
 
         // Postcss settings
-        postcss: !isDev && {
+        postcss: !env.IS_DEV && {
             preset: {
                 autoprefixer: {
                     grid: true,
