@@ -86,7 +86,7 @@ export default {
     ],
 
     image: {
-        domains: [env.SERVER_API_URL, 'lyaman-askerova.kz'],
+        domains: [env.SERVER_API_URL || 'lyaman-askerova.kz'],
         providers: {
             customProvider: {
                 name: 'customProvider',
