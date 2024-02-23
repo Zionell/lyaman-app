@@ -4,8 +4,7 @@ services:
   db:
     image: postgres
     restart: always
-    env_file:
-      - .env
+    env_file: .env
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -32,8 +31,7 @@ services:
     ports:
       - 80:80
       - 443:443
-    env_file:
-      - .env
+    env_file: .env
     networks:
       - strapi
 
@@ -71,8 +69,9 @@ services:
   frontend:
     restart: always
     build:
-      context: ./client
+      context: ./frontend
     command: npm run start
+    env_file: .env
     environment:
       SERVER_API_URL: ${SERVER_API_URL}
     volumes:
