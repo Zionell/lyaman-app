@@ -72,6 +72,7 @@ services:
     restart: always
     build:
       context: ./client
+    command: npm run start
     environment:
       SERVER_API_URL: ${SERVER_API_URL}
     volumes:
