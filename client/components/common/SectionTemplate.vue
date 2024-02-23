@@ -1,7 +1,7 @@
 <template>
-    <div :class="[$style.SectionTemplate, {[$style._isBlue]: isBlue}]">
+    <div :id="title.value" :class="$style.SectionTemplate">
         <div class="container">
-            <h2 :class="[$style.title, 'h3']">{{ title }}</h2>
+            <h2 :class="[$style.title, 'h2']">{{ title.label }}</h2>
 
             <slot></slot>
         </div>
@@ -14,13 +14,8 @@ export default {
 
     props: {
         title: {
-            type: String,
-            default: '',
-        },
-
-        isBlue: {
-            type: Boolean,
-            default: false,
+            type: Object,
+            default: () => ({}),
         },
     },
 };
@@ -29,29 +24,20 @@ export default {
 <style lang="scss" module>
     .SectionTemplate {
         padding: 5rem 0;
-
-        &._isBlue {
-            background: var(--secondary);
-
-            .title {
-                color: var(--white);
-            }
-        }
     }
 
     .title {
         width: 60%;
-        margin: 0 auto 6.4rem;
-        text-align: center;
-        color: var(--secondary);
+        margin-bottom: 6.4rem;
+        color: $light;
 
         @include respond-to(tablet) {
-            margin: 0 auto 4rem;
+            margin-bottom: 4rem;
         }
 
         @include respond-to(mobile) {
             width: 100%;
-            margin: 0 auto 2.4rem;
+            margin-bottom: 2.4rem;
             font-size: 2.4rem;
         }
     }

@@ -2,40 +2,29 @@
     <header :class="$style.TheHeader">
         <div :class="[$style.wrap, 'container']">
             <SvgIcon
-                ref="logo"
                 :class="$style.logo"
                 name="logo"
             />
 
             <nav :class="$style.nav">
-                <a
+                <button
                     v-for="(item, ind) in menuItems"
                     :key="ind"
-                    :href="`#${item.value}`"
-                    :class="[$style.navItem, 'link', 'navItem']"
+                    :class="[$style.navItem, 'link', 'p18']"
+                    @click="handleClick(item.value)"
                 >
                     {{ item.label }}
-                </a>
+                </button>
+                <span :class="$style.divider"/>
             </nav>
-
-            <VButton
-                :class="[$style.btn, 'button']"
-                icon="arrow-right"
-                round
-                @click="goToContacts"
-            >
-                Написать мне
-            </VButton>
-
-            <TheBurger/>
         </div>
+        <TheBurger/>
     </header>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import TheBurger from '~/components/layouts/header/TheBurger';
-import VButton from '~/components/ui/button/VButton';
 import { scrollTo } from '~/assets/js/common';
 
 export default {
@@ -43,13 +32,6 @@ export default {
 
     components: {
         TheBurger,
-        VButton,
-    },
-
-    data() {
-        return {
-            timeline: null,
-        };
     },
 
     computed: {
@@ -59,8 +41,8 @@ export default {
     },
 
     methods: {
-        goToContacts() {
-            scrollTo('contacts');
+        handleClick(val) {
+            scrollTo(val, 90);
         },
     },
 };
@@ -75,7 +57,7 @@ export default {
         display: flex;
         align-items: center;
         height: $h-height;
-        background: linear-gradient(180deg, var(--secondary) 0%, rgba(#2d60a2, .2) 100%);
+        background: $dark;
         transition: $transition;
 
         & .btn {
@@ -86,7 +68,6 @@ export default {
 
         @include respond-to(mobile) {
             height: $h-height-mobile;
-            background: var(--secondary);
         }
     }
 
@@ -104,20 +85,16 @@ export default {
     .logo {
         width: 17rem;
         height: 3.8rem;
+        color: $light;
     }
 
     .nav {
-        flex-grow: 1;
-        margin: 0 6.2rem;
-
         @include respond-to(mobile) {
             display: none;
         }
     }
 
     .navItem {
-        @extend .p16;
-
         position: relative;
         transition: $transition;
 
@@ -132,16 +109,21 @@ export default {
             display: block;
             width: 0;
             height: 1px;
-            background: var(--black);
+            background: $light;
             transition: $transition;
         }
 
-        @include hover() {
-            &:hover {
-                &:after {
-                    width: 100%;
-                }
+        @include hover {
+            &:after {
+                width: 100%;
             }
         }
+    }
+
+    .divider {
+        width: 1px;
+        height: 2.4rem;
+        margin: 0 1.6rem;
+        background: $light;
     }
 </style>

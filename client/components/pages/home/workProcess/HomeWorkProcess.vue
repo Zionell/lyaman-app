@@ -1,15 +1,19 @@
 <template>
     <ul :class="$style.HomeWorkProcess">
         <li
-            v-for="item in data"
+            v-for="(item, ind) in data"
             :key="item.id"
-            :class="$style.item"
+            :class="[$style.item, {[$style._isRight]: ind % 2 !== 0}]"
         >
-            <div :class="$style.itemTop">
-                <span></span>
+            <div
+                :class="$style.itemWrap"
+            >
+                <div :class="$style.itemPoint">
+                    <span></span>
+                </div>
+                <h4 :class="$style.itemTitle">{{ ind+1 }}. {{ item.attributes.title }}</h4>
+                <div :class="$style.itemText" v-html="item.attributes.text"></div>
             </div>
-            <h4 :class="$style.itemTitle">{{ item.title }}</h4>
-            <div :class="$style.itemText" v-html="item.text"></div>
         </li>
     </ul>
 </template>
@@ -29,9 +33,21 @@ export default {
 
 <style lang="scss" module>
     .HomeWorkProcess {
+        position: relative;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         gap: 3.2rem;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: $light;
+            transform: translateX(-50%);
+        }
 
         @include respond-to(mobile) {
             flex-direction: column;
@@ -40,41 +56,48 @@ export default {
     }
 
     .item {
-        width: 26rem;
+        position: relative;
+        display: flex;
+
+        &._isRight {
+            justify-content: flex-end;
+        }
     }
 
-    .itemTop {
+    .itemWrap {
+        width: 51.6rem;
+        padding: 2.4rem 4rem;
+        border-radius: 1.6rem;
+        background: rgba(255, 255, 255, .11);
+    }
+
+    .itemPoint {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 100%;
+        border: 2px solid $light;
+        background: $dark;
+        transform: translate(-50%, -50%);
 
         span {
-            display: flex;
-            flex-shrink: 0;
-            width: 2.4rem;
-            height: 2.4rem;
-            margin-right: 2.4rem;
-            border-radius: 50%;
-            background: var(--white);
-
-            @include respond-to(mobile) {
-                width: 1.4rem;
-                height: 1.4rem;
-            }
-        }
-
-        &:after {
-            content: "";
-            width: 60%;
-            border: 1px dashed var(--lightGrey);
-            opacity: .4;
+            width: 50%;
+            height: 50%;
+            border-radius: 100%;
+            background: $blue;
         }
     }
 
     .itemTitle {
-        @extend .p24b;
+        @extend .p21b;
 
-        margin: 1.6rem 0 .4rem;
-        color: var(--white);
+        margin-bottom: 2.4rem;
+        color: $blue;
 
         @include respond-to(mobile) {
             font-size: 1.8rem;
@@ -82,12 +105,6 @@ export default {
     }
 
     .itemText {
-        @extend .p16;
-
-        color: var(--white);
-
-        @include respond-to(mobile) {
-            font-size: 1.4rem;
-        }
+        @extend .p14;
     }
 </style>

@@ -36,17 +36,17 @@ export default {
 
     css: [
         '~/assets/scss/nullstyle',
-        '~/assets/scss/castom__scroll',
+        '~/assets/scss/custom__scroll',
         '~/assets/scss/style',
     ],
 
     styleResources: {
         scss: [
-            './assets/scss/shared/_function.scss',
-            './assets/scss/shared/_mixins.scss',
-            './assets/scss/shared/_fonts.scss',
-            './assets/scss/shared/_vars.scss',
-            './assets/scss/shared/_text.scss',
+            '~/assets/scss/shared/_function.scss',
+            '~/assets/scss/shared/_mixins.scss',
+            '~/assets/scss/shared/_fonts.scss',
+            '~/assets/scss/shared/_vars.scss',
+            '~/assets/scss/shared/_text.scss',
         ],
     },
 

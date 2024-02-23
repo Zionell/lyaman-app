@@ -1,10 +1,21 @@
 <template>
     <div :class="[$style.HomeHero, 'container']">
-        <div :class="$style.left">
+        <div :class="$style.content">
+            <h1 :class="$style.title">{{ data.title }}</h1>
+            <div :class="$style.text" v-html="data.text"/>
+
+            <VButton
+                @click="goToContacts"
+            >
+                {{ data.buttonText }}
+            </VButton>
+        </div>
+        <div :class="$style.right">
             <div :class="$style.imgWrap">
-                <nuxt-img
+                <NuxtImg
+                    v-if="image"
                     format="webp"
-                    :src="data.image"
+                    :src="image"
                     alt="Мое фото"
                     loading="lazy"
                     :placeholder="15"
@@ -14,23 +25,14 @@
             </div>
             <div :class="$style.tags">
                 <div :class="$style.tag">
-                    {{ data.tag1 }}
+                    <h5 :class="$style.tagTitle">{{ data.advantages_title_1 }}</h5>
+                    <div :class="$style.tagText">{{ data.advantages_text_1 }}</div>
                 </div>
                 <div :class="$style.tag">
-                    {{ data.tag2 }}
+                    <h5 :class="$style.tagTitle">{{ data.advantages_title_2 }}</h5>
+                    <div :class="$style.tagText">{{ data.advantages_text_2 }}</div>
                 </div>
             </div>
-        </div>
-        <div :class="$style.content">
-            <h1 :class="$style.title">{{ data.title }}</h1>
-            <div :class="$style.text" v-html="data.text"/>
-
-            <VButton
-                round
-                @click="goToContacts"
-            >
-                {{ data.btnText }}
-            </VButton>
         </div>
     </div>
 </template>
@@ -53,6 +55,12 @@ export default {
         },
     },
 
+    computed: {
+        image() {
+            return this.data?.image?.data?.attributes?.url;
+        },
+    },
+
     methods: {
         goToContacts() {
             scrollTo('contacts');
@@ -64,26 +72,19 @@ export default {
 <style lang="scss" module>
     .HomeHero {
         display: grid;
-        grid-template-columns: 50rem 1fr;
+        grid-template-columns: 51rem 1fr;
         align-items: center;
-        justify-content: space-between;
         gap: 10rem;
-        min-height: calc(100vh - $h-height);
-        padding-top: 1.6rem;
-        padding-bottom: 1.6rem;
+        min-height: calc(calc(var(--vh, 1vh) * 100) - $h-height);
 
         @include respond-to(tablet) {
             grid-template-columns: 1fr;
             gap: 3.2rem;
-            padding-top: 4.8rem;
-            padding-bottom: 4.8rem;
         }
 
         @include respond-to(mobile) {
             gap: 2.4rem;
             min-height: calc(100vh - $h-height-mobile);
-            padding-top: 2.4rem;
-            padding-bottom: 2.4rem;
         }
     }
 
@@ -111,9 +112,10 @@ export default {
     }
 
     .text {
-        @extend .p24;
+        @extend .p22;
 
-        padding: 4rem 0;
+        padding: 1.6rem 0 3.2rem;
+        color: $gray;
 
         @include respond-to(tablet) {
             padding: 2.4rem 0;
@@ -127,71 +129,69 @@ export default {
         }
     }
 
-    .left {
-        display: grid;
-        grid-template-rows: 1fr 7.2rem;
-        gap: 2.4rem;
+    .right {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
 
-        @include respond-to(tablet) {
-            grid-template-rows: 7.2rem 1fr;
-            order: 2;
-            height: 100%;
-        }
-
-        @include respond-to(mobile) {
-            grid-template-rows: 1fr 3.2rem;
+        &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            width: 70rem;
+            aspect-ratio: 1;
+            border-radius: 100%;
+            background: rgba(248, 247, 249, .1);
+            transform: translate(-50%, -50%);
+            filter: blur(200px);
         }
     }
 
     .imgWrap {
-        height: 50rem;
-        padding: 2rem;
-        border-radius: 3rem;
-        border: 5px solid var(--secondary);
-
-        @include respond-to(tablet) {
-            order: 2;
-            height: 75rem;
-        }
-
-        @include respond-to(mobile) {
-            order: 1;
-            height: 28rem;
-            padding: .8rem;
-        }
-    }
-
-    .image {
-        border-radius: 2rem;
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        width: 43rem;
+        height: 43rem;
+        border-radius: 2rem 2rem 0 0;
     }
 
     .tags {
+        position: relative;
+        z-index: 2;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: .5rem;
-
-        @include respond-to(tablet) {
-            order: 1;
-        }
-
-        @include respond-to(mobile) {
-            order: 2;
-        }
+        gap: 1.2rem;
+        width: 100%;
+        max-width: 45.6rem;
+        padding: 1.2rem;
+        border-radius: 1.6rem;
+        background: rgba(255, 255, 255, .88);
     }
 
     .tag {
-        @extend .p24;
-
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-radius: 5rem;
-        border: 5px solid var(--secondary);
-        color: var(--secondary);
+        color: $dark;
+    }
+
+    .tagTitle {
+        @extend .p26b;
 
         @include respond-to(mobile) {
             font-size: 1.6rem;
             line-height: 144%;
         }
+    }
+
+    .tagText {
+        @extend .p16m;
     }
 </style>

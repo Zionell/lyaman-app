@@ -1,7 +1,7 @@
 <template>
-    <div :class="[$style.DefaultLayout, 'castom__scroll']">
+    <div :class="$style.DefaultLayout">
         <TheHeader/>
-        <main>
+        <main :class="$style.main">
             <Nuxt/>
         </main>
         <TheFooter/>
@@ -24,6 +24,14 @@ export default {
 
 <style lang="scss" module>
     .DefaultLayout {
-        //
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
+        background: $dark;
+    }
+
+    .main {
+        flex-grow: 1;
     }
 </style>

@@ -3,36 +3,34 @@
         <HomeHero v-if="hero && hero.title" :data="hero"/>
 
         <SectionTemplate
-            v-if="projectSteps && projectSteps.steps"
-            :title="projectSteps.title"
+            v-if="workProcess && workProcess.work_process_items"
+            :title="workProcess.title.data.attributes"
         >
-            <HomeAboutCourse :data="projectSteps.steps"/>
+            <HomeWorkProcess :data="workProcess.work_process_items.data"/>
         </SectionTemplate>
 
         <SectionTemplate
-            v-if="workProcess && workProcess.steps"
-            :title="workProcess.title"
-            is-blue
+            v-if="cases && cases.case_items"
+            :title="cases.title.data.attributes"
         >
-            <HomeWorkProcess :data="workProcess.steps"/>
+            <HomeCases :data="cases.case_items.data"/>
         </SectionTemplate>
 
         <SectionTemplate
-            v-if="certificates && certificates.certs"
-            :title="certificates.title"
+            v-if="reviews && reviews.length"
+            :title="reviewsTitle"
         >
-            <HomeCertificates :data="certificates.certs"/>
+            <HomeReviews :data="reviews"/>
         </SectionTemplate>
 
-        <!--        <SectionTemplate-->
-        <!--            v-if="reviews && reviews.review"-->
-        <!--            :title="reviews.title"-->
-        <!--            is-blue-->
-        <!--        >-->
-        <!--            <HomeReviews :data="reviews.review"/>-->
-        <!--        </SectionTemplate>-->
+        <SectionTemplate
+            v-if="services && services.services"
+            :title="services.title.data.attributes"
+        >
+            <HomeServices :data="services.services.data"/>
+        </SectionTemplate>
 
-        <HomeForm id="contacts"/>
+        <HomeForm/>
     </div>
 </template>
 
@@ -40,46 +38,47 @@
 import HomeHero from '~/components/pages/home/HomeHero';
 import HomeForm from '~/components/pages/home/form/HomeForm';
 import SectionTemplate from '~/components/common/SectionTemplate';
-import HomeAboutCourse from '~/components/pages/home/aboutCourse/HomeAboutCourse';
 import HomeWorkProcess from '~/components/pages/home/workProcess/HomeWorkProcess';
-import HomeCertificates from '~/components/pages/HomeCertificates';
-// import HomeReviews from '~/components/pages/home/HomeReviews';
+import HomeCases from '~/components/pages/home/cases/HomeCases.vue';
+import HomeServices from '~/components/pages/home/services/HomeServices.vue';
+import HomeReviews from '~/components/pages/home/HomeReviews.vue';
+import { mapState } from 'vuex';
 
 export default {
     name: 'IndexPage',
 
     components: {
+        HomeReviews,
+        HomeServices,
+        HomeCases,
         HomeHero,
         SectionTemplate,
-        HomeAboutCourse,
         HomeWorkProcess,
         HomeForm,
-        HomeCertificates,
-        // HomeReviews,
     },
 
     async asyncData({ app }) {
         try {
             const [
                 hero,
-                projectSteps,
                 workProcess,
-                certificates,
-                // reviews,
+                cases,
+                services,
+                reviews,
             ] = await Promise.all([
-                app.$axios.$get(app.$api.header),
-                app.$axios.$get(app.$api.projectSteps),
-                app.$axios.$get(app.$api.workProcess),
-                app.$axios.$get(app.$api.certificates),
-                // app.$axios.$get(app.$api.reviews),
+                app.$axios.$get(app.$api.heroBlock),
+                app.$axios.$get(app.$api.workProcesses),
+                app.$axios.$get(app.$api.cases),
+                app.$axios.$get(app.$api.services),
+                app.$axios.$get(app.$api.reviews),
             ]);
 
             return {
-                hero: hero || {},
-                projectSteps: projectSteps || {},
-                workProcess: workProcess || {},
-                certificates: certificates || {},
-                // reviews: reviews || {},
+                hero: hero?.data?.attributes || {},
+                workProcess: workProcess?.data?.attributes || {},
+                cases: cases?.data?.attributes || {},
+                services: services?.data?.attributes || {},
+                reviews: reviews?.data || [],
             };
         } catch (e) {
             console.warn(e);
@@ -89,17 +88,27 @@ export default {
     data() {
         return {
             hero: {},
-            projectSteps: {},
             workProcess: {},
-            certificates: {},
-            reviews: {},
+            cases: {},
+            services: {},
+            reviews: [],
         };
+    },
+
+    computed: {
+        ...mapState({
+            menuItems: state => state.general.menuItems,
+        }),
+
+        reviewsTitle() {
+            return this.menuItems.find(m => m.value === 'reviews');
+        },
     },
 };
 </script>
 
 <style lang="scss" module>
     .IndexPage {
-        //
+        overflow: hidden;
     }
 </style>

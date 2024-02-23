@@ -45,18 +45,37 @@ server {
 
     error_page 497 https://$host:$server_port$request_uri;
 
-    location /static/ {
-        alias /app/www/static/;
-        expires 365d;
+    location /api/ {
+        include strapi;
     }
 
-    location /api/ {
-        include backend;
+    location /users-permissions/ {
+        include strapi;
+    }
+
+    location /content-type-builder/ {
+        include strapi;
+    }
+
+    location /content-manager/ {
+        include strapi;
+    }
+
+    location /upload/ {
+        include strapi;
+    }
+
+    location /i18n/ {
+        include strapi;
+    }
+
+    location /uploads/ {
+        include strapi;
     }
 
     location /admin/ {
         client_max_body_size 250M;
-        include backend;
+        include strapi;
     }
 
     location /.well-known/acme-challenge/ {

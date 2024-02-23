@@ -53,7 +53,6 @@
 
                         <VButton
                             :is-loading="isLoading"
-                            round
                             @click="submit"
                         >
                             Отправить
@@ -110,9 +109,9 @@ export default {
                     return;
                 }
                 await this.$axios.$post(this.$api.request, {
-                    ...this.formInfo,
-                }, {
-                    withCredentials: false,
+                    data: {
+                        ...this.formInfo,
+                    },
                 });
                 this.isSuccess = true;
                 this.setTimer();
@@ -169,17 +168,6 @@ export default {
         padding-top: 10rem;
         padding-bottom: 5rem;
 
-        &:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            z-index: -1;
-            height: 35rem;
-            background: var(--secondary);
-        }
-
         @include respond-to(tablet) {
             padding-top: 5rem;
             padding-bottom: 3rem;
@@ -213,8 +201,6 @@ export default {
     .title {
         @extend .h3;
 
-        color: var(--white);
-
         @include respond-to(tablet) {
             font-size: 3.2rem;
         }
@@ -225,10 +211,6 @@ export default {
     }
 
     .text {
-        @extend .p18;
-
-        color: var(--lightGrey);
-
         @include respond-to(tablet) {
             font-size: 1.6rem;
         }
@@ -238,8 +220,7 @@ export default {
         height: 50rem;
         padding: 3.2rem 2.4rem;
         border-radius: 3rem;
-        border: 1px solid var(--border);
-        background: var(--white);
+        background: $gray-100;
         box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
 
         @include respond-to(tablet) {
@@ -262,7 +243,7 @@ export default {
     .icon {
         width: 7.4rem;
         height: 7.4rem;
-        color: var(--primary);
+        color: $blue;
     }
 
     .form {

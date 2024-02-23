@@ -1,6 +1,5 @@
 <template>
-    <component
-        :is="tag"
+    <button
         :class="[$style.VButton, classes]"
         v-bind="$attrs"
         @click.prevent="$emit('click')"
@@ -16,7 +15,7 @@
                 />
             </div>
         </transition>
-    </component>
+    </button>
 </template>
 
 <script>
@@ -24,24 +23,6 @@ export default {
     name: 'VButton',
 
     props: {
-        tag: {
-            type: String,
-            default: 'button',
-            validator: () => ['button', 'div', 'a', 'nuxt-link'],
-        },
-
-        color: {
-            type: String,
-            default: 'primary',
-            validator: () => ['primary', 'secondary'],
-        },
-
-        type: {
-            type: String,
-            default: 'primary',
-            validator: () => ['primary', 'secondary', 'outlined', 'slider'],
-        },
-
         icon: {
             type: String,
             default: '',
@@ -52,12 +33,22 @@ export default {
             default: false,
         },
 
-        round: {
+        color: {
+            type: String,
+            default: '',
+        },
+
+        size: {
+            type: String,
+            default: '',
+        },
+
+        isLoading: {
             type: Boolean,
             default: false,
         },
 
-        isLoading: {
+        isSlider: {
             type: Boolean,
             default: false,
         },
@@ -66,10 +57,11 @@ export default {
     computed: {
         classes() {
             return {
-                [this.$style[this.type]]: this.type,
+                [this.$style[`color-${this.color}`]]: this.color,
+                [this.$style[`size-${this.size}`]]: this.size,
                 [this.$style['is-disabled']]: this.disabled,
-                [this.$style['is-round']]: this.round,
                 [this.$style['is-loading']]: this.isLoading,
+                [this.$style['is-slider']]: this.isSlider,
             };
         },
     },
@@ -82,53 +74,71 @@ export default {
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        padding: 1rem 2rem;
-        border: 1px solid var(--primary);
-        background: var(--primary);
-        font-size: 1.6rem;
-        font-weight: 500;
-        line-height: 2.6rem;
-        letter-spacing: -.029rem;
-        color: var(--white);
+        padding: 1.2rem 2.4rem;
+        border-radius: 1.6rem;
+        border: 2px solid $light;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        color: $light;
         transition: $transition;
-
-        &.slider {
-            width: 5rem;
-            height: 5rem;
-            padding: 0;
-            border-radius: 50%;
-            border: 1px solid var(--white);
-            background: var(--white);
-            color: var(--primary);
-
-            .icon {
-                width: 3rem;
-                height: 3rem;
-                margin-left: 0;
-            }
-
-            @include hover() {
-                &:hover {
-                    background: var(--primary);
-                    color: var(--white);
-                }
-            }
-        }
 
         &.is-loading,
         &.is-disabled {
-            pointer-events: none;
-            opacity: .6;
+            opacity: .4;
+            cursor: not-allowed;
         }
 
-        &.is-round {
-            border-radius: 5rem;
+        &.is-slider {
+            padding: 0;
+            border: none;
+
+            .icon {
+                width: 2.4rem;
+                height: 2.4rem;
+                margin-left: 0;
+            }
         }
 
-        @include hover() {
-            &:hover {
-                background: var(--white);
-                color: var(--primary);
+        @include hover {
+            background: $light;
+            color: $blue;
+        }
+
+        &.size-small {
+            width: max-content;
+            padding: .8rem 2.4rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        &.color-blue {
+            position: relative;
+            overflow: hidden;
+            border: none;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .25);
+                background: $linearGradient;
+                transition: $transition;
+            }
+
+            .wrap {
+                position: relative;
+                z-index: 2;
+            }
+
+            @include hover {
+                &:before {
+                    opacity: 0;
+                }
             }
         }
 

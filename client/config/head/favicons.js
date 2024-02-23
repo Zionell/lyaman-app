@@ -22,16 +22,16 @@ const faviconsLinks = [
         sizes: '16x16',
         href: '/favicons/favicon-16x16.png',
     },
-    // {
-    //   rel: 'manifest',
-    //   href: '/favicons/site.webmanifest',
-    //   crossorigin: 'use-credentials',
-    // },
-    // {
-    //   rel: 'mask-icon',
-    //   href: '/favicons/safari-pinned-tab.svg',
-    //   color: '#f2aaaa',
-    // },
+    {
+        rel: 'manifest',
+        href: '/favicons/site.webmanifest',
+        crossorigin: 'use-credentials',
+    },
+    {
+        rel: 'mask-icon',
+        href: '/favicons/safari-pinned-tab.svg',
+        color: '#f2aaaa',
+    },
 ];
 
 const faviconsMeta = [

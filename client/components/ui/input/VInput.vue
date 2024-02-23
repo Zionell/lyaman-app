@@ -56,11 +56,12 @@ export default {
 
 <style lang="scss" module>
     .label {
-        @extend .p16b;
+        @extend .p14;
 
         position: relative;
         display: grid;
         gap: .4rem;
+        line-height: 1.2;
 
         @include respond-to(mobile) {
             font-size: 1.4rem;
@@ -69,11 +70,13 @@ export default {
 
     .input,
     .textarea {
-        @extend .p14;
-
         padding: .9rem 1.8rem;
-        border-radius: 2rem;
-        border: 1px solid var(--border);
+        border-radius: 1.6rem;
+        border: 1px solid $light;
+
+        &:focus {
+            border: 1px solid $blue;
+        }
     }
 
     .textarea {
@@ -82,8 +85,6 @@ export default {
     }
 
     .error {
-        @extend .p14;
-
         position: absolute;
         bottom: -2.4rem;
         left: 0;

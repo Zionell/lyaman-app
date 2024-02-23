@@ -19,10 +19,11 @@ html {
 
 body {
     font-family: $ff-regular;
+    color: $light;
 }
 
 .container {
-    max-width: 1320px;
+    max-width: 1140px;
     width: 100%;
     margin: 0 auto;
     padding-right: 2rem;
@@ -30,14 +31,14 @@ body {
 }
 
 ._active-link {
-    color: var(--white);
+    color: $blue;
 }
 
 .link {
-    color: var(--black);
+    color: $light;
 
     &._active-link {
-        color: var(--primary);
+        color: $blue;
     }
 }
 

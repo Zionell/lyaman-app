@@ -3,15 +3,13 @@ export const state = () => ({
     socialLinks: [],
 });
 
-export const getters = {};
-
 export const mutations = {
     SET_MENU_ITEMS(state, payload) {
-        state.menuItems = payload;
+        payload.data.forEach(d => state.menuItems.push(d.attributes));
     },
-    
+
     SET_SOCIAL_LINKS(state, payload) {
-        state.socialLinks = payload;
+        payload.data.forEach(d => state.menuItems.push(d.attributes));
     },
 };
 
@@ -20,13 +18,13 @@ export const actions = {
         try {
             const [
                 menuItems,
-                contacts,
+                messengers,
             ] = await Promise.all([
                 this.$axios.$get(this.$api.menuItems),
-                this.$axios.$get(this.$api.contacts),
+                this.$axios.$get(this.$api.messengers),
             ]);
             commit('SET_MENU_ITEMS', menuItems);
-            commit('SET_SOCIAL_LINKS', contacts);
+            commit('SET_SOCIAL_LINKS', messengers);
         } catch (e) {
             console.log(e);
         }

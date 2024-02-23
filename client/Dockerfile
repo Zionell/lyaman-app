@@ -1,10 +1,10 @@
-FROM node:16.16-alpine
+FROM node:18
 
 WORKDIR /app
 
 EXPOSE 3000
 
-RUN apk update && apk upgrade
+#RUN apk update && apk upgrade
 
 COPY ./package*.json /app/
 

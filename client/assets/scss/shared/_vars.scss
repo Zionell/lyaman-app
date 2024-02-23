@@ -1,14 +1,10 @@
 //Colors
-:root {
-    --primary: #2e4fd7;
-    --primaryHover: #1a3bc3;
-    --secondary: #2d60a2;
-    --black: #000;
-    --white: #fff;
-    --grey: #1b2124;
-    --lightGrey: #f3eef3;
-    --border: #b4b4b4;
-}
+$dark: #1f1f1f;
+$light: #f8f7f9;
+$gray: #f8f7f97f;
+$gray-100: #333;
+$blue: #019afd;
+$linearGradient: linear-gradient(180deg, #9cccf8 0%, #309cff 45.19%, #9cccf8 100%);
 
 $error: #f00;
 

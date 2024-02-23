@@ -3,7 +3,7 @@
         <VButton
             v-if="slider"
             :class="[$style.btn, $style._prev]"
-            type="slider"
+            is-slider
             icon="left"
             :disabled="isAvailable.isBeginning"
             @click="slider.slidePrev()"
@@ -21,8 +21,16 @@
                     class="swiper-slide"
                     :class="$style.review"
                 >
-                    <div :class="$style.reviewText" v-html="review.text"/>
-                    <div :class="$style.reviewAuthor" v-html="review.title"/>
+                    <NuxtImg
+                        v-if="image(review)"
+                        format="webp"
+                        :src="image(review)"
+                        alt="Мое фото"
+                        loading="lazy"
+                        :placeholder="15"
+                        provider="customProvider"
+                        :class="$style.image"
+                    />
                 </div>
             </div>
         </div>
@@ -30,7 +38,7 @@
         <VButton
             v-if="slider"
             :class="[$style.btn, $style._next]"
-            type="slider"
+            is-slider
             icon="right"
             :disabled="isAvailable.isEnd"
             @click="slider.slideNext()"
@@ -73,13 +81,16 @@ export default {
     methods: {
         initSlider() {
             this.slider = new this.$Swiper(this.$refs.slider, {
-                slidesPerView: 1,
-                spaceBetween: 100,
+                slidesPerView: 3,
+                spaceBetween: 32,
                 speed: 800,
             });
         },
-    },
 
+        image(val) {
+            return val?.attributes?.image?.data?.attributes?.url;
+        },
+    },
 };
 </script>
 
@@ -96,67 +107,13 @@ export default {
     }
 
     .review {
-        padding: 7rem;
-        border-radius: 2rem;
-        background: var(--white);
+        width: 35rem;
+        height: 35rem;
         user-select: none;
-
-        @include respond-to(tablet) {
-            padding: 3.6rem;
-        }
-
-        @include respond-to(mobile) {
-            padding: 1.8rem;
-        }
     }
 
-    .reviewText {
-        font-family: "Roboto", sans-serif;
-        font-size: 2.4rem;
-        line-height: 3.6rem;
-
-        @include respond-to(mobile) {
-            font-size: 1.8rem;
-            line-height: 2.4rem;
-        }
-    }
-
-    .reviewAuthor {
-        position: relative;
-        padding-top: 2.3rem;
-        padding-left: 7rem;
-        font-size: 2.4rem;
-        color: var(--grey);
-
-        &:before {
-            content: "";
-            position: absolute;
-            top: 65%;
-            left: 0;
-            display: block;
-            width: 6rem;
-            height: 3px;
-            margin-top: 1px;
-            background-color: var(--primary);
-        }
-
-        @include respond-to(tablet) {
-            padding-left: 5rem;
-
-            &:before {
-                width: 3.6rem;
-            }
-        }
-
-        @include respond-to(mobile) {
-            padding-top: 1.2rem;
-            padding-left: 4rem;
-            font-size: 1.4rem;
-
-            &:before {
-                width: 2.4rem;
-            }
-        }
+    .image {
+        object-fit: contain;
     }
 
     .btn {

@@ -1,83 +1,73 @@
 .h1 {
     font-family: $ff-bold;
-    font-size: 4.2rem;
-    line-height: 5.2rem;
-    letter-spacing: -.076rem;
+    font-size: 6.4rem;
+    font-weight: 700;
+    line-height: 9.6rem;
 }
 
 .h2 {
     font-family: $ff-bold;
     font-size: 5.2rem;
     line-height: 120%;
-    letter-spacing: -.094rem;
 }
 
 .h3 {
     font-family: $ff-bold;
     font-size: 4.2rem;
     line-height: 124%;
-    letter-spacing: -.076rem;
 }
 
 .h4 {
     font-family: $ff-bold;
     font-size: 3.2rem;
     line-height: 119%;
-    letter-spacing: -.058rem;
 }
+
+.p22 {
+    font-size: 2.2rem;
+    line-height: 3.3rem;
+}
+
+.p18 {
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+}
+
+.p26b {
+    font-family: $ff-bold;
+    font-size: 2.6rem;
+    line-height: 3.4rem;
+}
+
+.p21b {
+    font-family: $ff-bold;
+    font-size: 2.1rem;
+    line-height: 3.4rem;
+}
+
+.p16m {
+    font-family: $ff-medium;
+    font-size: 1.6rem;
+    line-height: 3.4rem;
+}
+
+.p14 {
+    font-family: $ff-medium;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+}
+
+
+
 
 .p24 {
     font-family: $ff-regular;
     font-size: 2.4rem;
     line-height: 3.4rem;
-    letter-spacing: -.043rem;
 }
 
 .p24b {
     font-family: $ff-bold;
     font-size: 2.4rem;
     line-height: 142%;
-    letter-spacing: -.043rem;
-}
-
-.p18 {
-    font-family: $ff-regular;
-    font-size: 1.8rem;
-    line-height: 156%;
-    letter-spacing: -.032rem;
-}
-
-.p18b {
-    font-family: $ff-bold;
-    font-size: 1.8rem;
-    line-height: 156%;
-    letter-spacing: -.032rem;
-}
-
-.p16 {
-    font-family: $ff-regular;
-    font-size: 1.6rem;
-    line-height: 162%;
-    letter-spacing: -.029rem;
-}
-
-.p16b {
-    font-family: $ff-bold;
-    font-size: 1.6rem;
-    line-height: 162%;
-    letter-spacing: -.029rem;
-}
-
-.p14 {
-    font-family: $ff-regular;
-    font-size: 1.4rem;
-    line-height: 170%;
-    letter-spacing: -.025rem;
-}
-
-.p14b {
-    font-family: $ff-bold;
-    font-size: 1.4rem;
-    line-height: 170%;
-    letter-spacing: -.025rem;
 }

@@ -130,6 +130,6 @@ export default {
     }
 
     .navItem {
-        @extend .p18;
+        //
     }
 </style>

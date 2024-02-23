@@ -6,10 +6,19 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - postgresdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - strapi
 
   nginx:
+    restart: always
     volumes:
       - nginx_cache:/var/lib/nginx/proxy_cache
       - static:/app/www/static/
@@ -20,26 +29,44 @@ services:
       - certs:/etc/nginx/certs
     build:
       context: ./nginx
-    depends_on:
-      - server
     ports:
       - 80:80
       - 443:443
     env_file:
       - .env
+    networks:
+      - strapi
 
-  server:
-    restart: always
+  strapi:
     build:
-      context: ./server
-    env_file:
-      - .env
+      context: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: db
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      PUBLIC_URL: ${PUBLIC_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      NODE_ENV: ${NODE_ENV}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./strapi/config:/app/config
+      - ./strapi/src:/app/src
+      - ./strapi/package.json:/app/package.json
+      - ./strapi/package-lock.lock:/app/package-lock.lock
+      - ./strapi/.env:/app/.env
+      - ./strapi/public/uploads:/app/public/uploads
     depends_on:
       - db
-    volumes:
-      - static:/app/static/
-    entrypoint: ./entrypoint.sh
-    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - strapi
 
   frontend:
     restart: always
@@ -50,13 +77,19 @@ services:
       - .env
     volumes:
       - nuxt:/app/nuxt_volume:delegated
+    ports:
+      - "3000:3000"
+    networks:
+      - strapi
 
+networks:
+  strapi:
 
 volumes:
+  postgresdata:
   nginx_cache:
   local_static:
   static:
-  postgresdata:
   nuxt:
   acme.sh:
   certs:

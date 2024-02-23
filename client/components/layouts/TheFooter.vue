@@ -10,7 +10,7 @@
                         v-for="(item, ind) in menuItems"
                         :key="ind"
                         :to="`#${item.value}`"
-                        :class="[$style.navItem, 'link']"
+                        :class="[$style.navItem, 'link', 'p18']"
                     >
                         {{ item.label }}
                     </nuxt-link>
@@ -56,7 +56,6 @@ export default {
     .TheFooter {
         padding-top: 3.2rem;
         padding-bottom: 3.2rem;
-        background: var(--secondary);
     }
 
     .footerTop {
@@ -88,7 +87,7 @@ export default {
         }
 
         &:visited {
-            color: var(--white);
+            color: $light;
         }
 
         &:after {
@@ -98,15 +97,13 @@ export default {
             display: block;
             width: 0;
             height: 1px;
-            background: var(--black);
+            background: $light;
             transition: $transition;
         }
 
-        @include hover() {
-            &:hover {
-                &:after {
-                    width: 100%;
-                }
+        @include hover {
+            &:after {
+                width: 100%;
             }
         }
 
@@ -116,8 +113,6 @@ export default {
     }
 
     .socialLinks {
-        @extend .p14b;
-
         display: grid;
         justify-items: end;
         gap: .5rem;
@@ -130,18 +125,22 @@ export default {
     }
 
     .link {
-        color: var(--black);
+        color: $dark;
         transition: $transition;
 
-        @include hover() {
-            &:hover {
-                color: var(--primaryHover);
-            }
+        @include hover {
+            color: $blue;
         }
     }
 
     .logo {
         width: 17rem;
         height: 3.8rem;
+        color: $light;
+        transition: $transition;
+
+        @include hover {
+            color: $blue;
+        }
     }
 </style>
