@@ -16,3 +16,4 @@ RUN chmod +x entrypoint.production.sh
 
 RUN npm run build
 
+CMD ["npm", "run", "start"]
