@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_process_items",
+  "info": {
+    "singularName": "work-process-item",
+    "pluralName": "work-process-items",
+    "displayName": "workProcessItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    }
+  }
+}

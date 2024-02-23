@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_items",
+  "info": {
+    "singularName": "case-item",
+    "pluralName": "case-items",
+    "displayName": "CaseItem",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "string"
+    },
+    "imageTitle": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "text": {
+      "type": "blocks"
+    }
+  }
+}

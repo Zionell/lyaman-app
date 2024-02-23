@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "work_process_sections",
+  "info": {
+    "singularName": "work-process-section",
+    "pluralName": "work-process-sections",
+    "displayName": "WorkProcessSection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::menu-item.menu-item"
+    },
+    "work_process_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-process-item.work-process-item"
+    }
+  }
+}

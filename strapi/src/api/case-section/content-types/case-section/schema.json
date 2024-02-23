@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "case_sections",
+  "info": {
+    "singularName": "case-section",
+    "pluralName": "case-sections",
+    "displayName": "CaseSection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::menu-item.menu-item"
+    },
+    "case_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::case-item.case-item"
+    }
+  }
+}

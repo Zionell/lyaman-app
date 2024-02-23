@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "messengers",
+  "info": {
+    "singularName": "messenger",
+    "pluralName": "messengers",
+    "displayName": "messenger"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "hero_blocks",
+  "info": {
+    "singularName": "hero-block",
+    "pluralName": "hero-blocks",
+    "displayName": "heroBlock",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "advantages_title_1": {
+      "type": "string"
+    },
+    "advantages_text_1": {
+      "type": "string"
+    },
+    "advantages_title_2": {
+      "type": "string"
+    },
+    "advantages_text_2": {
+      "type": "string"
+    }
+  }
+}

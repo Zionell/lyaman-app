@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "review_items",
+  "info": {
+    "singularName": "review-item",
+    "pluralName": "review-items",
+    "displayName": "ReviewItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
