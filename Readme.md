@@ -1,3 +1,5 @@
+sudo docker exec -it <container-id> /bin/sh
+
 acme.sh --issue --server letsencrypt -d lyaman-askerova.kz -w /var/www/local_static --config-home
 /acme.sh
 

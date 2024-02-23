@@ -39,7 +39,7 @@ services:
 
   strapi:
     build:
-      context: ./backend
+      context: ./strapi
     restart: unless-stopped
     env_file: .env
     environment:
