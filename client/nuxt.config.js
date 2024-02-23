@@ -84,7 +84,7 @@ export default {
     ],
 
     image: {
-        domains: [base_url],
+        domains: [base_url, 'https://lyaman-askerova.kz'],
         providers: {
             customProvider: {
                 name: 'customProvider',
