@@ -75,6 +75,8 @@ services:
     command: npm run start
     env_file:
       - .env
+    environment:
+      SERVER_API_URL: ${SERVER_API_URL}
     volumes:
       - nuxt:/app/nuxt_volume:delegated
     ports:
