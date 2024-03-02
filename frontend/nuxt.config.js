@@ -1,7 +1,5 @@
 import headConfig from './config/headConfig';
 import { plugins } from './config/plugins';
-import { proxy } from './config/proxy';
-
 
 require('dotenv')
     .config();
@@ -98,7 +96,11 @@ export default {
         },
     },
 
-    proxy: proxy(env.SERVER_API_URL),
+    proxy: {
+        '/strapi/v1/': {
+            target: env.SERVER_API_URL,
+        },
+    },
 
     axios: {
         proxy: true,
