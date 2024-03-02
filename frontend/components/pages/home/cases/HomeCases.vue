@@ -42,12 +42,11 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div v-if="image(item)">
                             <div :class="$style.imageTitle">
                                 {{ item.attributes.imageTitle }}
                             </div>
                             <NuxtImg
-                                v-if="image(item)"
                                 format="webp"
                                 :src="image(item)"
                                 alt="Мое фото"
@@ -119,7 +118,10 @@ export default {
         },
 
         prepareList(arr) {
-            return arr[0].children.map(ch => ch.children[0].text);
+            if (!Array.isArray(arr) && !arr?.length) {
+                return [];
+            }
+            return arr[0]?.children?.map(ch => ch?.children[0]?.text);
         },
     },
 };
