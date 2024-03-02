@@ -2,7 +2,7 @@ FROM node:18
 
 WORKDIR /app
 
-#RUN apk update && apk upgrade
+RUN apk update && apk upgrade
 
 COPY ./package*.json /app/
 

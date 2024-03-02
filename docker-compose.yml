@@ -78,6 +78,7 @@ services:
       - nuxt:/app/nuxt_volume:delegated
     depends_on:
       - strapi
+      - nginx
     networks:
       - strapi
 
