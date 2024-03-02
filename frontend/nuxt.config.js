@@ -96,16 +96,9 @@ export default {
         },
     },
 
-    proxy: {
-        '/strapi/v1/': {
-            target: env.SERVER_API_URL,
-        },
-    },
-
-    axios: {
-        proxy: env.IS_DEV,
-        baseURL: env.SERVER_API_URL,
-    },
+    // axios: {
+    //     baseURL: env.SERVER_API_URL,
+    // },
 
     build: {
         publicPath: '/n/',
