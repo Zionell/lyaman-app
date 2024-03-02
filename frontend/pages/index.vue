@@ -1,36 +1,42 @@
 <template>
     <div :class="$style.IndexPage">
-        <HomeHero v-if="hero && hero.title" :data="hero"/>
+        <transition name="fade" mode="out-in">
+            <LoaderPage v-if="isLoading" />
 
-        <SectionTemplate
-            v-if="workProcess && workProcess.work_process_items"
-            :title="workProcess.title.data.attributes"
-        >
-            <HomeWorkProcess :data="workProcess.work_process_items.data"/>
-        </SectionTemplate>
+            <div v-else>
+                <HomeHero v-if="hero && hero.title" :data="hero"/>
 
-        <SectionTemplate
-            v-if="cases && cases.case_items"
-            :title="cases.title.data.attributes"
-        >
-            <HomeCases :data="cases.case_items.data"/>
-        </SectionTemplate>
+                <SectionTemplate
+                    v-if="workProcess && workProcess.work_process_items"
+                    :title="workProcess.title.data.attributes"
+                >
+                    <HomeWorkProcess :data="workProcess.work_process_items.data"/>
+                </SectionTemplate>
 
-        <SectionTemplate
-            v-if="reviews && reviews.length"
-            :title="reviewsTitle"
-        >
-            <HomeReviews :data="reviews"/>
-        </SectionTemplate>
+                <SectionTemplate
+                    v-if="cases && cases.case_items"
+                    :title="cases.title.data.attributes"
+                >
+                    <HomeCases :data="cases.case_items.data"/>
+                </SectionTemplate>
 
-        <SectionTemplate
-            v-if="services && services.services"
-            :title="services.title.data.attributes"
-        >
-            <HomeServices :data="services.services.data"/>
-        </SectionTemplate>
+                <SectionTemplate
+                    v-if="reviews && reviews.length"
+                    :title="reviewsTitle"
+                >
+                    <HomeReviews :data="reviews"/>
+                </SectionTemplate>
 
-        <HomeForm/>
+                <SectionTemplate
+                    v-if="services && services.services"
+                    :title="services.title.data.attributes"
+                >
+                    <HomeServices :data="services.services.data"/>
+                </SectionTemplate>
+
+                <HomeForm/>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -43,11 +49,13 @@ import HomeCases from '~/components/pages/home/cases/HomeCases.vue';
 import HomeServices from '~/components/pages/home/services/HomeServices.vue';
 import HomeReviews from '~/components/pages/home/HomeReviews.vue';
 import { mapState } from 'vuex';
+import LoaderPage from '~/components/common/LoaderPage.vue';
 
 export default {
     name: 'IndexPage',
 
     components: {
+        LoaderPage,
         HomeReviews,
         HomeServices,
         HomeCases,
@@ -57,36 +65,9 @@ export default {
         HomeForm,
     },
 
-    // async asyncData({ app }) {
-    //     try {
-    //         const [
-    //             hero,
-    //             workProcess,
-    //             cases,
-    //             services,
-    //             reviews,
-    //         ] = await Promise.all([
-    //             app.$axios.$get(app.$api.heroBlock),
-    //             app.$axios.$get(app.$api.workProcesses),
-    //             app.$axios.$get(app.$api.cases),
-    //             app.$axios.$get(app.$api.services),
-    //             app.$axios.$get(app.$api.reviews),
-    //         ]);
-    //
-    //         return {
-    //             hero: hero?.data?.attributes || {},
-    //             workProcess: workProcess?.data?.attributes || {},
-    //             cases: cases?.data?.attributes || {},
-    //             services: services?.data?.attributes || {},
-    //             reviews: reviews?.data || [],
-    //         };
-    //     } catch (e) {
-    //         console.warn(e);
-    //     }
-    // },
-
     data() {
         return {
+            isLoading: true,
             hero: {},
             workProcess: {},
             cases: {},
@@ -133,6 +114,8 @@ export default {
                 this.reviews = reviews?.data || [];
             } catch (e) {
                 console.warn(e);
+            } finally {
+                this.isLoading = false;
             }
         },
     },

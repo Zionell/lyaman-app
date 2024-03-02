@@ -30,7 +30,7 @@ export default {
     },
 
     loading: {
-        color: '#d9ff6c',
+        color: '#019afd',
         height: '2px',
         throttle: 0,
     },
