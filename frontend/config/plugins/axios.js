@@ -1,5 +1,4 @@
 export default ({ $axios, req }) => {
-    $axios.defaults.withCredentials = false;
 
     const headers = req && req.headers ? Object.assign({}, req.headers) : {};
     $axios.setHeader('X-Forwarded-Host', headers['x-forwarded-host']);
