@@ -45,23 +45,19 @@ server {
 
     error_page 497 https://$host:$server_port$request_uri;
 
-    location /strapi/v1/ {
+    location /strapi/v1 {
         include strapi;
     }
 
-    location /public/ {
-        include frontend;
-    }
-
-    location /users-permissions/ {
+    location /users-permissions {
         include strapi;
     }
 
-    location /content-type-builder/ {
+    location /content-type-builder {
         include strapi;
     }
 
-    location /content-manager/ {
+    location /content-manager {
         include strapi;
     }
 
@@ -69,15 +65,15 @@ server {
         include strapi;
     }
 
-    location /i18n/ {
+    location /i18n {
         include strapi;
     }
 
-    location /uploads/ {
+    location /uploads {
         include strapi;
     }
 
-    location /admin/ {
+    location /admin {
         client_max_body_size 250M;
         include strapi;
     }
