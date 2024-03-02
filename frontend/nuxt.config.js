@@ -96,9 +96,10 @@ export default {
         },
     },
 
-    // axios: {
-    //     baseURL: env.SERVER_API_URL,
-    // },
+    axios: {
+        proxy: env.IS_DEV,
+        baseURL: env.SERVER_API_URL,
+    },
 
     build: {
         publicPath: '/n/',
