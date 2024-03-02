@@ -57,33 +57,33 @@ export default {
         HomeForm,
     },
 
-    async asyncData({ app }) {
-        try {
-            const [
-                hero,
-                workProcess,
-                cases,
-                services,
-                reviews,
-            ] = await Promise.all([
-                app.$axios.$get(app.$api.heroBlock),
-                app.$axios.$get(app.$api.workProcesses),
-                app.$axios.$get(app.$api.cases),
-                app.$axios.$get(app.$api.services),
-                app.$axios.$get(app.$api.reviews),
-            ]);
-
-            return {
-                hero: hero?.data?.attributes || {},
-                workProcess: workProcess?.data?.attributes || {},
-                cases: cases?.data?.attributes || {},
-                services: services?.data?.attributes || {},
-                reviews: reviews?.data || [],
-            };
-        } catch (e) {
-            console.warn(e);
-        }
-    },
+    // async asyncData({ app }) {
+    //     try {
+    //         const [
+    //             hero,
+    //             workProcess,
+    //             cases,
+    //             services,
+    //             reviews,
+    //         ] = await Promise.all([
+    //             app.$axios.$get(app.$api.heroBlock),
+    //             app.$axios.$get(app.$api.workProcesses),
+    //             app.$axios.$get(app.$api.cases),
+    //             app.$axios.$get(app.$api.services),
+    //             app.$axios.$get(app.$api.reviews),
+    //         ]);
+    //
+    //         return {
+    //             hero: hero?.data?.attributes || {},
+    //             workProcess: workProcess?.data?.attributes || {},
+    //             cases: cases?.data?.attributes || {},
+    //             services: services?.data?.attributes || {},
+    //             reviews: reviews?.data || [],
+    //         };
+    //     } catch (e) {
+    //         console.warn(e);
+    //     }
+    // },
 
     data() {
         return {
@@ -102,6 +102,38 @@ export default {
 
         reviewsTitle() {
             return this.menuItems.find(m => m.value === 'reviews');
+        },
+    },
+
+    mounted() {
+        this.fetchData();
+    },
+
+    methods: {
+        async fetchData() {
+            try {
+                const [
+                    hero,
+                    workProcess,
+                    cases,
+                    services,
+                    reviews,
+                ] = await Promise.all([
+                    this.$axios.$get(this.$api.heroBlock),
+                    this.$axios.$get(this.$api.workProcesses),
+                    this.$axios.$get(this.$api.cases),
+                    this.$axios.$get(this.$api.services),
+                    this.$axios.$get(this.$api.reviews),
+                ]);
+
+                this.hero = hero?.data?.attributes || {};
+                this.workProcess = workProcess?.data?.attributes || {};
+                this.cases = cases?.data?.attributes || {};
+                this.services = services?.data?.attributes || {};
+                this.reviews = reviews?.data || [];
+            } catch (e) {
+                console.warn(e);
+            }
         },
     },
 };
