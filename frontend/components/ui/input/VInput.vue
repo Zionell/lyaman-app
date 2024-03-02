@@ -56,12 +56,13 @@ export default {
 
 <style lang="scss" module>
     .label {
-        @extend .p14;
-
         position: relative;
         display: grid;
-        gap: .4rem;
+        font-family: $ff-medium;
+        font-size: 1.4rem;
+        line-height: 2.4rem;
         line-height: 1.2;
+        gap: .4rem;
 
         @include respond-to(mobile) {
             font-size: 1.4rem;

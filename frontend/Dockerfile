@@ -8,7 +8,7 @@ EXPOSE 3000
 
 COPY ./package*.json /app/
 
-RUN npm install && npm cache clean --force
+RUN npm ci && npm cache clean --force
 
 COPY . .
 

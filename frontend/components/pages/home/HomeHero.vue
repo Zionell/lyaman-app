@@ -99,7 +99,10 @@ export default {
     }
 
     .title {
-        @extend .h1;
+        font-family: $ff-bold;
+        font-size: 6.4rem;
+        font-weight: 700;
+        line-height: 9.6rem;
 
         @include respond-to(tablet) {
             font-size: 3.2rem;
@@ -112,9 +115,9 @@ export default {
     }
 
     .text {
-        @extend .p22;
-
         padding: 1.6rem 0 3.2rem;
+        font-size: 2.2rem;
+        line-height: 3.3rem;
         color: $gray;
 
         @include respond-to(tablet) {
@@ -146,7 +149,7 @@ export default {
             width: 70rem;
             aspect-ratio: 1;
             border-radius: 100%;
-            background: rgba(248, 247, 249, .1);
+            background: rgb(248 247 249 / 10%);
             transform: translate(-50%, -50%);
             filter: blur(200px);
         }
@@ -171,7 +174,7 @@ export default {
         max-width: 45.6rem;
         padding: 1.2rem;
         border-radius: 1.6rem;
-        background: rgba(255, 255, 255, .88);
+        background: rgb(255 255 255 / 88%);
     }
 
     .tag {
@@ -183,7 +186,9 @@ export default {
     }
 
     .tagTitle {
-        @extend .p26b;
+        font-family: $ff-bold;
+        font-size: 2.6rem;
+        line-height: 3.4rem;
 
         @include respond-to(mobile) {
             font-size: 1.6rem;
@@ -192,6 +197,8 @@ export default {
     }
 
     .tagText {
-        @extend .p16m;
+        font-family: $ff-medium;
+        font-size: 1.6rem;
+        line-height: 3.4rem;
     }
 </style>

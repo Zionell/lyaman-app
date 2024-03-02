@@ -8,7 +8,7 @@
             <h6 :class="$style.serviceTitle">{{ item.attributes.title }}</h6>
 
             <ul :class="$style.serviceText">
-                <li v-for="(listItem, ind) in prepareList(item.attributes)" :key="`item_${ind}`">
+                <li v-for="(listItem, idx) in prepareList(item.attributes)" :key="`item_${idx}`">
                     <SvgIcon
                         :class="$style.icon"
                         name="success"

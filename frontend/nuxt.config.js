@@ -48,7 +48,6 @@ export default {
             '~/assets/scss/shared/_mixins.scss',
             '~/assets/scss/shared/_fonts.scss',
             '~/assets/scss/shared/_vars.scss',
-            '~/assets/scss/shared/_text.scss',
         ],
     },
 

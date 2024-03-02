@@ -10,7 +10,7 @@
         </SectionTemplate>
 
         <SectionTemplate
-            v-if="cases && cases.case_items"
+            v-if="cases && cases.case_items && false"
             :title="cases.title.data.attributes"
         >
             <HomeCases :data="cases.case_items.data"/>

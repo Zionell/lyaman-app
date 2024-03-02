@@ -68,7 +68,7 @@ export default {
         width: 51.6rem;
         padding: 2.4rem 4rem;
         border-radius: 1.6rem;
-        background: rgba(255, 255, 255, .11);
+        background: rgb(255 255 255 / 11%);
     }
 
     .itemPoint {
@@ -94,9 +94,10 @@ export default {
     }
 
     .itemTitle {
-        @extend .p21b;
-
         margin-bottom: 2.4rem;
+        font-family: $ff-bold;
+        font-size: 2.1rem;
+        line-height: 3.4rem;
         color: $blue;
 
         @include respond-to(mobile) {
@@ -105,6 +106,8 @@ export default {
     }
 
     .itemText {
-        @extend .p14;
+        font-family: $ff-medium;
+        font-size: 1.4rem;
+        line-height: 2.4rem;
     }
 </style>

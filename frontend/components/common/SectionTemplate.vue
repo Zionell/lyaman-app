@@ -1,7 +1,7 @@
 <template>
     <div :id="title.value" :class="$style.SectionTemplate">
         <div class="container">
-            <h2 :class="[$style.title, 'h2']">{{ title.label }}</h2>
+            <h2 :class="$style.title">{{ title.label }}</h2>
 
             <slot></slot>
         </div>
@@ -29,6 +29,9 @@ export default {
     .title {
         width: 60%;
         margin-bottom: 6.4rem;
+        font-family: $ff-bold;
+        font-size: 5.2rem;
+        line-height: 120%;
         color: $light;
 
         @include respond-to(tablet) {

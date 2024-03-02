@@ -199,7 +199,9 @@ export default {
     }
 
     .title {
-        @extend .h3;
+        font-family: $ff-bold;
+        font-size: 4.2rem;
+        line-height: 124%;
 
         @include respond-to(tablet) {
             font-size: 3.2rem;
@@ -221,7 +223,7 @@ export default {
         padding: 3.2rem 2.4rem;
         border-radius: 3rem;
         background: $gray-100;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+        box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
 
         @include respond-to(tablet) {
             padding: 2.1rem 1.8rem;
