@@ -45,8 +45,13 @@ server {
 
     error_page 497 https://$host:$server_port$request_uri;
 
-    location /api/ {
+
+    location /strapi/v1/ {
         include strapi;
+    }
+
+    location /public/ {
+        include frontend;
     }
 
     location /users-permissions/ {
