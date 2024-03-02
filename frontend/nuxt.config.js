@@ -98,10 +98,10 @@ export default {
         },
     },
 
-    proxy: env.IS_DEV ? proxy(env.SERVER_API_URL) : false,
+    proxy: proxy(env.SERVER_API_URL),
 
     axios: {
-        proxy: env.IS_DEV,
+        proxy: true,
         baseURL: env.SERVER_API_URL,
     },
 
