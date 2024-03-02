@@ -69,7 +69,6 @@ export default {
         ],
     },
 
-
     modules: [
         '@nuxtjs/axios',
         '@nuxtjs/svg-sprite',
@@ -95,10 +94,6 @@ export default {
             },
         },
     },
-
-    // axios: {
-    //     proxy: true,
-    // },
 
     build: {
         publicPath: '/n/',
