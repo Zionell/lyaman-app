@@ -89,7 +89,7 @@ export default {
                 name: 'customProvider',
                 provider: '~/assets/js/imageProvider',
                 options: {
-                    baseURL: env.SERVER_API_URL,
+                    baseURL: env.IS_DEV ? env.SERVER_API_URL : '',
                 },
             },
         },
