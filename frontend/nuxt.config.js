@@ -1,5 +1,7 @@
 import headConfig from './config/headConfig';
 import { plugins } from './config/plugins';
+import { proxy } from './config/proxy';
+
 
 require('dotenv')
     .config();
@@ -96,10 +98,11 @@ export default {
         },
     },
 
+    proxy: proxy(env.SERVER_API_URL),
+
     axios: {
-        progress: false,
-        baseURL: env.SERVER_API_URL || '',
-        proxy: env.IS_DEV,
+        proxy: true,
+        baseURL: env.SERVER_API_URL,
     },
 
     build: {
