@@ -95,6 +95,17 @@ export default {
         },
     },
 
+    proxy: {
+        '/api/': {
+            target: env.SERVER_API_URL,
+        },
+    },
+
+    axios: {
+        proxy: true,
+        baseURL: env.SERVER_API_URL,
+    },
+
     build: {
         publicPath: '/n/',
 
