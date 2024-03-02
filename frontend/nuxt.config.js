@@ -103,9 +103,8 @@ export default {
     },
 
     axios: {
-        proxy: true,
+        proxy: env.IS_DEV,
         baseURL: env.SERVER_API_URL,
-        browserBaseURL: env.SERVER_API_URL || '',
     },
 
     build: {
