@@ -2,8 +2,6 @@ FROM node:18
 
 WORKDIR /app
 
-EXPOSE 3000
-
 #RUN apk update && apk upgrade
 
 COPY ./package*.json /app/
