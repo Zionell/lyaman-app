@@ -57,33 +57,33 @@ export default {
         HomeForm,
     },
 
-    async asyncData({ app }) {
-        try {
-            const [
-                hero,
-                workProcess,
-                cases,
-                services,
-                reviews,
-            ] = await Promise.all([
-                app.$axios.$get(app.$api.heroBlock),
-                app.$axios.$get(app.$api.workProcesses),
-                app.$axios.$get(app.$api.cases),
-                app.$axios.$get(app.$api.services),
-                app.$axios.$get(app.$api.reviews),
-            ]);
-
-            return {
-                hero: hero?.data?.attributes || {},
-                workProcess: workProcess?.data?.attributes || {},
-                cases: cases?.data?.attributes || {},
-                services: services?.data?.attributes || {},
-                reviews: reviews?.data || [],
-            };
-        } catch (e) {
-            console.warn(e);
-        }
-    },
+    // async asyncData({ app }) {
+    //     try {
+    //         const [
+    //             hero,
+    //             workProcess,
+    //             cases,
+    //             services,
+    //             reviews,
+    //         ] = await Promise.all([
+    //             app.$axios.$get(app.$api.heroBlock),
+    //             app.$axios.$get(app.$api.workProcesses),
+    //             app.$axios.$get(app.$api.cases),
+    //             app.$axios.$get(app.$api.services),
+    //             app.$axios.$get(app.$api.reviews),
+    //         ]);
+    //
+    //         return {
+    //             hero: hero?.data?.attributes || {},
+    //             workProcess: workProcess?.data?.attributes || {},
+    //             cases: cases?.data?.attributes || {},
+    //             services: services?.data?.attributes || {},
+    //             reviews: reviews?.data || [],
+    //         };
+    //     } catch (e) {
+    //         console.warn(e);
+    //     }
+    // },
 
     data() {
         return {

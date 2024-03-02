@@ -98,22 +98,12 @@ export default {
         },
     },
 
-    publicRuntimeConfig: {
-        axios: {
-            browserBaseURL: env.SERVER_API_URL,
-        },
-    },
-
-    privateRuntimeConfig: {
-        axios: {
-            baseURL: env.SERVER_API_URL,
-        },
-    },
-
-    // proxy: proxy(env.SERVER_API_URL),
+    proxy: proxy(env.SERVER_API_URL),
 
     axios: {
         proxy: false,
+        baseURL: env.SERVER_API_URL,
+        browserBaseURL: env.SERVER_API_URL || '',
     },
 
     build: {
