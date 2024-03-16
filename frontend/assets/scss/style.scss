@@ -20,6 +20,10 @@ html {
 body {
     font-family: $ff-regular;
     color: $light;
+
+    img {
+        object-fit: contain;
+    }
 }
 
 .container {

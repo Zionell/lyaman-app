@@ -25,11 +25,12 @@
                         v-if="image(review)"
                         format="webp"
                         :src="image(review)"
-                        alt="Мое фото"
+                        alt="Фото отзыва"
                         loading="lazy"
-                        :placeholder="15"
-                        provider="customProvider"
+                        placeholder
+                        fit="contain"
                         :class="$style.image"
+                        provider="strapi"
                     />
                 </div>
             </div>

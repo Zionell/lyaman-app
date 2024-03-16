@@ -49,11 +49,12 @@
                             <NuxtImg
                                 format="webp"
                                 :src="image(item)"
-                                alt="Мое фото"
+                                alt="Пример работ"
                                 loading="lazy"
-                                :placeholder="15"
-                                provider="customProvider"
+                                placeholder
+                                fit="contain"
                                 :class="$style.image"
+                                provider="strapi"
                             />
                         </div>
                     </div>

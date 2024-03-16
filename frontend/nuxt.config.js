@@ -84,14 +84,8 @@ export default {
 
     image: {
         domains: [env.SERVER_API_URL || 'lyaman-askerova.kz'],
-        providers: {
-            customProvider: {
-                name: 'customProvider',
-                provider: '~/assets/js/imageProvider',
-                options: {
-                    baseURL: env.IS_DEV ? env.SERVER_API_URL : '',
-                },
-            },
+        strapi: {
+            baseURL: env.SERVER_API_URL,
         },
     },
 

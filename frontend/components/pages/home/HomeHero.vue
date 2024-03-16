@@ -18,9 +18,10 @@
                     :src="image"
                     alt="Мое фото"
                     loading="lazy"
-                    :placeholder="15"
-                    provider="customProvider"
+                    placeholder
+                    fit="contain"
                     :class="$style.image"
+                    provider="strapi"
                 />
             </div>
             <div :class="$style.tags">
