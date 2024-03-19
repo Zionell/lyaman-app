@@ -74,6 +74,7 @@ services:
     env_file: .env
     environment:
       SERVER_API_URL: ${SERVER_API_URL}
+      IMAGE_PROXY: ${IMAGE_PROXY}
     volumes:
       - nuxt:/app/nuxt_volume:delegated
     ports:
