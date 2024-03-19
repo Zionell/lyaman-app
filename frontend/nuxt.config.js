@@ -7,6 +7,7 @@ require('dotenv')
 const env = {
     IS_DEV: process.env.NODE_ENV === 'development',
     SERVER_API_URL: process.env.SERVER_API_URL,
+    IMAGE_PROXY: process.env.IMAGE_PROXY,
 };
 
 export default {
@@ -85,7 +86,7 @@ export default {
     image: {
         domains: [env.SERVER_API_URL || 'lyaman-askerova.kz'],
         strapi: {
-            baseURL: env.SERVER_API_URL,
+            baseURL: env.IMAGE_PROXY,
         },
     },
 
