@@ -5,11 +5,15 @@ export const state = () => ({
 
 export const mutations = {
     SET_MENU_ITEMS(state, payload) {
-        payload.data.forEach(d => state.menuItems.push(d.attributes));
+        if (!state.menuItems.length) {
+            payload.data.forEach(d => state.menuItems.push(d.attributes));
+        }
     },
 
     SET_SOCIAL_LINKS(state, payload) {
-        payload.data.forEach(d => state.socialLinks.push(d.attributes));
+        if (!state.socialLinks.length) {
+            payload.data.forEach(d => state.socialLinks.push(d.attributes));
+        }
     },
 };
 

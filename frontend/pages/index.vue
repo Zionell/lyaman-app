@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 import HomeHero from '~/components/pages/home/HomeHero';
 import HomeForm from '~/components/pages/home/form/HomeForm';
 import SectionTemplate from '~/components/common/SectionTemplate';
@@ -48,7 +50,6 @@ import HomeWorkProcess from '~/components/pages/home/workProcess/HomeWorkProcess
 import HomeCases from '~/components/pages/home/cases/HomeCases.vue';
 import HomeServices from '~/components/pages/home/services/HomeServices.vue';
 import HomeReviews from '~/components/pages/home/HomeReviews.vue';
-import { mapState } from 'vuex';
 import LoaderPage from '~/components/common/LoaderPage.vue';
 
 export default {
@@ -91,6 +92,10 @@ export default {
     },
 
     methods: {
+        ...mapActions({
+            fetchContacts: 'general/fetchContacts',
+        }),
+
         async fetchData() {
             try {
                 const [
@@ -105,6 +110,7 @@ export default {
                     this.$axios.$get(this.$api.cases),
                     this.$axios.$get(this.$api.services),
                     this.$axios.$get(this.$api.reviews),
+                    this.fetchContacts(),
                 ]);
 
                 this.hero = hero?.data?.attributes || {};
