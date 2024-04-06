@@ -1,5 +1,5 @@
 <template>
-    <section :class="$style.HomeForm">
+    <section id="contacts" :class="$style.HomeForm">
         <div :class="[$style.wrap, 'container']">
             <div :class="$style.content">
                 <h2 :class="$style.title">Остались вопросы? <br> Заполняй форму!</h2>

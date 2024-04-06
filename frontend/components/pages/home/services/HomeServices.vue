@@ -21,6 +21,7 @@
                 :class="$style.btn"
                 :color="ind === 1 ? 'blue' : ''"
                 size="small"
+                @click="goToContacts"
             >
                 ОБСУДИТЬ ПРОЕКТ
             </VButton>
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import { scrollTo } from '~/assets/js/common';
+
 export default {
     name: 'HomeServices',
 
@@ -42,6 +45,10 @@ export default {
     methods: {
         prepareList(arr) {
             return arr.items[0].children.map(ch => ch.children[0].text);
+        },
+
+        goToContacts() {
+            scrollTo('contacts');
         },
     },
 };

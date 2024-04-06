@@ -9,7 +9,7 @@ export const mutations = {
     },
 
     SET_SOCIAL_LINKS(state, payload) {
-        payload.data.forEach(d => state.menuItems.push(d.attributes));
+        payload.data.forEach(d => state.socialLinks.push(d.attributes));
     },
 };
 

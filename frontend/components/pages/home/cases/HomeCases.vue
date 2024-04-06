@@ -21,8 +21,8 @@
                     class="swiper-slide"
                     :class="$style.case"
                 >
-                    <h4 :class="$style.caseTitle">{{ item.attributes.title }}</h4>
                     <div :class="$style.caseContent">
+                        <h4 :class="$style.caseTitle">{{ item.attributes.title }}</h4>
                         <div :class="$style.caseText">
                             <div :class="$style.caseTask">
                                 <p :class="$style.caseItemTitle">Задачи:&nbsp;</p>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div v-if="image(item)">
+                        <div v-if="image(item)" :class="$style.imageWrap">
                             <div :class="$style.imageTitle">
                                 {{ item.attributes.imageTitle }}
                             </div>
@@ -149,8 +149,6 @@ export default {
     }
 
     .caseTitle {
-        max-width: 60%;
-        margin-bottom: 4rem;
         font-size: 2.2rem;
         font-weight: 700;
         line-height: 2.4rem;
@@ -158,8 +156,8 @@ export default {
 
     .caseContent {
         display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 10rem;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 4rem 10rem;
     }
 
     .caseText {
@@ -204,6 +202,11 @@ export default {
         }
     }
 
+    .imageWrap {
+        grid-column: 2/3;
+        grid-row: 1/3;
+    }
+
     .imageTitle {
         font-size: 1.4rem;
         font-weight: 700;
@@ -211,8 +214,8 @@ export default {
     }
 
     .image {
-        width: 30rem;
-        height: 30rem;
+        width: 100%;
+        height: auto;
     }
 
     .btn {

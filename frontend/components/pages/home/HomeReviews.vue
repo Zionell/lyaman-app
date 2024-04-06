@@ -108,13 +108,19 @@ export default {
     }
 
     .review {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
         width: 35rem;
         height: 35rem;
         user-select: none;
     }
 
     .image {
+        width: 100%;
+        height: auto;
         object-fit: contain;
+        border-radius: .8rem;
     }
 
     .btn {

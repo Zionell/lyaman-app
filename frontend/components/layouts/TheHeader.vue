@@ -16,6 +16,25 @@
                     {{ item.label }}
                 </button>
                 <span :class="$style.divider"/>
+                <a
+                    v-for="(mes, ind) in messengers"
+                    :key="ind"
+                    :href="mes.link"
+                    target="_blank"
+                    :class="$style.link"
+                >
+                    <NuxtImg
+                        v-if="image(mes.icon)"
+                        format="webp"
+                        :src="image(mes.icon)"
+                        alt="Фото отзыва"
+                        loading="lazy"
+                        placeholder
+                        fit="contain"
+                        :class="$style.image"
+                        provider="strapi"
+                    />
+                </a>
             </nav>
         </div>
         <TheBurger/>
@@ -37,12 +56,17 @@ export default {
     computed: {
         ...mapState({
             menuItems: state => state.general.menuItems,
+            messengers: state => state.general.socialLinks,
         }),
     },
 
     methods: {
         handleClick(val) {
             scrollTo(val, 90);
+        },
+
+        image(val) {
+            return val?.data?.attributes?.url;
         },
     },
 };
@@ -89,6 +113,9 @@ export default {
     }
 
     .nav {
+        display: flex;
+        align-items: center;
+
         @include respond-to(mobile) {
             display: none;
         }
@@ -125,5 +152,22 @@ export default {
         height: 2.4rem;
         margin: 0 1.6rem;
         background: $light;
+    }
+
+    .link {
+        transition: $transition;
+
+        &:not(:last-child) {
+            margin-right: .8rem;
+        }
+
+        @include hover {
+            filter: brightness(.5);
+        }
+    }
+
+    .image {
+        width: 3.2rem;
+        height: 3.2rem;
     }
 </style>
